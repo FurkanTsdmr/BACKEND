@@ -171,9 +171,21 @@ SELECT * FROM film WHERE replacement_cost =12.99;
 //Yukarıdaki örneğimizde biz diyoruz ki film içerisindeki tüm verileri seç ve replacement_cost!u 12.99
 olan verileri döndür diyoruz.
 
+SELECT * FROM actor
+WHERE first_name='Penelope';
+//first_name in değeri string olduğu için SQL'de stringleri '' içerisine yazarız.
+
+
+
+
+
+
+
 Söz dizimi olarak SQL boşlukları yok sayarak ilerler bizler daha kolay şekilde okunmasını sağlamak için
 SELECT * FROM film diyerek ilk seçiçi kısmımızı oluşturduktan sonra diğer sorgumuzu alta yazarız
 WHERE rental_rate=0.99;
+Postgresql dizinleri ilk olarak FROM'dan okumaya başlar. Hangi verileri çekicem diyerek yani FROM film gibi o satırdan başlar. Sonra Bu verileri çekmemdeki koşulum nedir diye bakar WHERE rental_rate=0.99 en son da SELECT
+ile istenen sütunları bize getirir.
 
 
 Karşılaştırma Operatörleri
