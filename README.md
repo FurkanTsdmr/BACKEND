@@ -319,6 +319,7 @@ BETWEEN AND Söz Dizimi
 SELECT <sütun_adı>, <sütun_adı>, ...
 FROM <tablo_adı>
 WHERE <koşul>;
+
 BETWEEN Örnek Kullanım
 SELECT *
 FROM film
@@ -333,7 +334,22 @@ FROM film
 WHERE length = 30 OR length = 60 OR length = 90 OR length = 120;
 sorgusuyla verileri aldık ancak burada şöyle bir sorunumuz var peki 4 farklı değer için değil 14 farklı değer için bu sorgumuzu gerçekleştirmek için 14 ayrı OR mantıksal operatörü kullanmamız gerekirdi. Bunun yerine istenilen değerleri liste haline geitip IN anahtar kelimesiyle kullanabiliriz.
 
-IN Söz Dizimi
+--------------------------------------------
+SELECT title,length FROM film
+WHERE length NOT BETWEEN 90 AND 120;
+Bize 90 ile 120 sınırları aralıgındaki filmleri getiriyordu fakat başına NOT koyduğumuz için 90 ile 120 dk arasındaki filmleri çıkarıp o halde bize getiriyor fakat 90 ile 120 DAHİL DEĞİLDİR!! Çünkü 90 ile 120 BETWEEN yapısına dahildir bunu unutmayın !!!
+length < 90 OR length >120 çıktısı gelir bize.
+--------------------------------------------
+SELECT rental_rate,replacement_cost FROM film
+WHERE (rental_rate BETWEEN 2 AND 4) AND 
+(replacement_cost BETWEEN 10 AND 20)
+rental_rate imiz 2 ile 4 arasında ve replacement_cost değerimizin de 10-20 arasında olduğunu istediğimiz sorgu.
+--------------------------------------------
+<hr>
+
+
+					IN Söz Dizimi
+IN: ANAHTAR KELİMİSİNDE BİZ ORDA VERDİĞİMİZ DEĞERLERE BAKARIZ ÖRNEĞİN (40,50) BİZE SADECE 40 VE 50 OLANLARI GETİRİR.
 SELECT <sütun_adı>, <sütun_adı>, ...
 FROM <tablo_adı>
 WHERE <sütun_adı> IN (değer1, değer2, ...);
@@ -342,20 +358,52 @@ SELECT *
 FROM film
 WHERE length IN (30,60,90,120);
 
+--------------------------------------------
+SELECT length FROM film
+WHERE length IN (40,50,60)
+Uzunlugu 40,50,60 olanları getiririz.Tekli olarakta sorgumuzu yapabiliriz.
+SELECT length FROM film
+WHERE length = 40 OR length=50 OR length =60; ile aynı sonuçları verir syntaxları farklıdır.
+--------------------------------------------
+SELECT * FROM film
+WHERE replacement_cost IN (10.99,12.99,16.99)
+--------------------------------------------
+SELECT * FROM film
+WHERE replacement_cost NOT IN (10.99,12.99,16.99)
+10.99,12.99,16.99'ların dahil olamdıgı replacement_costları bizlere getirir.
+--------------------------------------------
+
+<hr>
 
 
+						LIKE ve ILIKE
+						
+Aşağıdaki sorgumuzda actor tablomuzda bulunan tüm sütunlardaki verileri first_name sütununda ki değeri 'Penelope' olmak üzere getiriyoruz.
+
+SELECT *
+FROM actor
+WHERE first_name = 'Penelope';
+Ancak bizler bazı durumlarda bu şekilde tam eşleşme değil belirli şablonlara uyan koşulların sağlanmasını isteriz. Örneğin aşağıdaki sorgumuzda first_name sütunun 'Penelope' değerine eşit olmasını değil, ilk harfin 'P' olması koşulunu sağlar. Bunun için LIKE operatörünü kullanırız.
+
+SELECT *
+FROM actor
+WHERE first_name LIKE 'P%';
+Burada kullanılan % karakteri sıfır, bir veya daha fazla karakteri temsil eder ve Wildcard olarak isimlendirilir. Bir diğer wildcard karakteri _ karakteridir ve bir karakteri temsil eder.
+
+LIKE Söz Dizimi
+SELECT <sütun_adı>, <sütun_adı>, ...
+FROM <tablo_adı>
+WHERE <sütun_adı> LIKE <şablon>;
+ILIKE operatörü LIKE operatörünün case - insensitive versiyonudur.
 
 
-
-
-
-
-
-
-
-
-
-
+% : Valcard işareti anlamına gelir ya herhangi bir karakter yoktur ya da birden fazla karakter için yer tututcu işlevi görür.
+WHERE first_name LIKE 'M%' M ile başlayan isimleri bize getirir 'MA%' diyip te sınır koyabiliriz herhangi bir sınır yoktur bir de '%y' kullanımı vardır buda son harfi arar yani burda son harfi 'y' olanları ara diyoruz.
+ 
+--------------------------------------------
+SELECT * FROM customer
+WHERE first_name LIKE 'M%'
+M ile baslayan tüm isimleri almamıza yarar.
 
 
 
