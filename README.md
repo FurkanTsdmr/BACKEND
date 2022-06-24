@@ -56,7 +56,7 @@ Nesneye Yönelik Veritabanı
 İlişkisel veritabanı yönetim sistemlerinde veriler satır ve sütunlarında oluşan tablolarda tutulur. 
 Her sütunda aynı tür verilerin tutulması sebebiyle yüksek bir veri tutarlılığına sahiptir.
 
-				                      SQL (Structured Query Language) Nedir?
+				                SQL (Structured Query Language) Nedir?
 SQL Türkçe ifadesiyle yapılandırılmış sorgu dili anlamına gelmektedir. Biz SQL sayesinde verilerimizin bulunduğu veritabanı ile iletişime geçeriz.4.nesil programlama dili olarakta ifade edilir
 (giderek makine dilinden insan diline yaklaşıldıgını ifade eder.).
 
@@ -103,7 +103,8 @@ postgres=# geldikten sonra biz artık veritabanı ile iletişimizi kurduk anlam�
 
 
 
-							               SELECT
+							     
+							      SELECT
 Sorgu (Query)
 SQL komutlarını içeren sorgu cümleleridir.
 
@@ -206,7 +207,7 @@ WHERE rental_rate <> 4.99 ;
 
 
 
-				WHERE ve Mantıksal Operatörler
+				     WHERE ve Mantıksal Operatörler
 Geçen çalışmamızda WHERE anahtar kelimesi ve karşılaştırma operatörleri üzerine konuştuk. Karşılaştırma operatörleri sayesinde koşulumuzu belirtiyorduk ancak çoğu durumda biz birden fazla koşulu gerçekleştirme isteriz bunun için mantıksal operatörlerden faydalanırız.
 
 Mantıksal Operatörler
@@ -306,7 +307,7 @@ BU KOŞULDA PENELOPE'YE BAKAR SONRA LAST_NAME'E BAKAR VE SONRA BİR SONRAKİ AND
 <hr>
 
 
-								BETWEEN ve IN
+					     BETWEEN ve IN
 BETWEEN
 Aşağıdaki sorgumuzda AND mantıksal operatörü yardımıyla film tablosunda bulunan verilerimizi uzunluğu 140 tan küçük eşit VE 100 den büyük eşit olmak üzere sıralıyoruz.
 
@@ -348,7 +349,7 @@ rental_rate imiz 2 ile 4 arasında ve replacement_cost değerimizin de 10-20 ara
 <hr>
 
 
-					IN Söz Dizimi
+					   IN Söz Dizimi
 IN: ANAHTAR KELİMİSİNDE BİZ ORDA VERDİĞİMİZ DEĞERLERE BAKARIZ ÖRNEĞİN (40,50) BİZE SADECE 40 VE 50 OLANLARI GETİRİR.
 SELECT <sütun_adı>, <sütun_adı>, ...
 FROM <tablo_adı>
@@ -376,8 +377,8 @@ WHERE replacement_cost NOT IN (10.99,12.99,16.99)
 <hr>
 
 
-						LIKE ve ILIKE
-						
+						    LIKE ve ILIKE
+						   
 Aşağıdaki sorgumuzda actor tablomuzda bulunan tüm sütunlardaki verileri first_name sütununda ki değeri 'Penelope' olmak üzere getiriyoruz.
 
 SELECT *
