@@ -254,6 +254,27 @@ SELECT * FROM film
 WHERE rental_rate=4.99 AND rental_rate=2.99;
 BU SORUDA BİZ KİRALAMA ORANI 4.99 VE KİRALAMA ORANI 2.99'U GETİR DİYORUZ SANKİ HEM 4.99 HEM DE 2.99'A SAHİP OLACAKMIŞ GİBİDİR VE BİZE HERHANGİ BİR VERİ DÖNMEZ.
 AND YERİNE OR DEDİĞİMİZ ZAMAN 1.KOŞUL 2.KOŞUL VEYA HER İKİSİDE DOĞRU OLDUGU İÇİN OLDUGU İÇİN BİZE SONUÇLARI GETİRECEKTİR.
+-----------------------------------------------------------------------
+SELECT * FROM film
+WHERE rental_rate=4.99 AND rental_duration=3 AND replacement_cost > 20;
+BURDAKİ ÖRNEĞİ ŞÖYLE DÜŞÜNELİM İLK RENTAL_RATE'İ 4.99 OLAN SONRA RENTAL_DURATİON'U 3 OLAN VE SONRA RELACEMENT_CONST'U 20'DEN BÜYÜK OLANLARI GETİR DİYORUZ.
+-----------------------------------------------------------------------
+SELECT * FROM film
+WHERE replacement_cost < 17 AND replacement_cost > 20;
+BU TARZ SORGUMUZDA HATA ALACAĞIZDIR NEDENİ Replacement_cost HEM 17'DEN KÜÇÜK OLUP 20'DEN BÜYÜK OLMASI İMKANSIZ OLDUGU İÇİN HATA DÖNECEKTİR.
+ANCAK OR YAZDIGIMIZ ZAMAN HEM 17 DEN KÜÇÜK OLANLAR HEM DE 20'DEN BÜYÜK OLANLAR GELİR
+-----------------------------------------------------------------------
+SELECT * FROM film
+WHERE NOT  (rental_rate=4.99 AND replacement_cost=20.99);
+BU SORGUMUZDA RENTAL_RATE'DE 4.99 VE REPLACEMENT_COST'TA 20.99 U GÖRÜRÜZ BUNUN NEDENİ BİZ BUNLASRI PARANTEZ İÇERİSNE ALDIK VE BAŞLARINA NOT DEDİK YANİ (rental_rate=4.99 VE replacement_cost=20.99)'İ OLANLARI GETİRME DİYORUZ.
+-----------------------------------------------------------------------
+SELECT * FROM film
+WHERE NOT (NOT(rental_rate=4.99 AND replacement_cost=20.99));
+BU SORGUMUZDA İSE BİZE 4.99 VE 20.99 OLANLARI GETİRİR NEDENİ 2 ADET NOT KULLANDIGIMIZ İÇİN BİRBİRLERİNİN TÜMLEYENLERİ OLUP SORGU İÇERİSİNDEKİLE GETİR DEMEK OLUYOR.
+
+
+
+
 
 
 ![image](https://user-images.githubusercontent.com/66878884/175494882-c25dfa05-84d1-4173-af30-80ae1b93b43e.png)
