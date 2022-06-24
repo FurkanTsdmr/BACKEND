@@ -234,6 +234,23 @@ WHERE NOT (rental_rate = 4.99 OR rental_rate = 2.99)
 Mantıksal operatörleri sıklıkla birlikte kullanırız. Yukarıdaki örneğimizde sıralayacağımız verilerin rental_rate sütunlarında bulunan değerlerinin 4.99 veya 2.99 olmamasını istiyoruz.
 
 
+--> AND: AND OPERATÖRÜ HEM ÖNÜNDEKİ VE HEM DE BİR ARKADASINDA Kİ SORGUNUN DOĞRU OLMASI DURUMUNDA BİZE İLGİLİ DURUMU 
+DÖNER.
+
+-->OR: OR OPERATÖRÜNDE İLK KOSULDAN VEYA İKİNCİ KOSULDAN HERHANGİ BİRİ DOĞRU OLDUGU ZAAMAN TRUE DÖNER VE BİZE SONUCU GETİRİR.
+--------------------------------------------------------------------
+SELECT first_name,last_name FROM actor
+WHERE first_name = 'Penelope' OR first_name='bob';
+
+SELECT first_name,last_name FROM actor
+WHERE first_name = 'Penelope' OR first_name='Bob';
+
+YUKARIDAKİ İKİ SORGUDA AYNI GÖRÜNEBİLİR FAKAT DEĞER SORGULARINDA CASE SENSIVITY OLABİLİR VE TABLOMUZDA Bob İSMİ VAR FAKAT bob İSMİ YOK İSE BİZE İLK SORGUDA FIRST NAME'I bob OLAN BULAMADIĞI İÇİN DÖNDÜRMEZ FAKAT Bob ŞEKLİNDE ARATTIĞIMIZDA EŞLESEN 1 DEĞER OLDUGU İÇİN BİZE HEM Penelope hem de Bob DEĞERLERİNİN SONUÇLARINI GETİRİR.
+----------------------------------------------------------------------
+
+
+
+![image](https://user-images.githubusercontent.com/66878884/175494882-c25dfa05-84d1-4173-af30-80ae1b93b43e.png)
 
 
 
