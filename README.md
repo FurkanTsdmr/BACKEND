@@ -167,12 +167,23 @@ FROM film
 WHERE replacement_cost = 14.99;
 Bu sorgumuzda dvdrental veritabanında bulunan film tablosundaki title ve replacement_cost sütunlarında bulunan verileri çekiyoruz ancak bu kez tüm verileri değil replacement_cost = 14.99 koşulunu sağlayan verileri alıyoruz.
 
+SELECT * FROM film WHERE replacement_cost =12.99;
+//Yukarıdaki örneğimizde biz diyoruz ki film içerisindeki tüm verileri seç ve replacement_cost!u 12.99
+olan verileri döndür diyoruz.
+
+Söz dizimi olarak SQL boşlukları yok sayarak ilerler bizler daha kolay şekilde okunmasını sağlamak için
+SELECT * FROM film diyerek ilk seçiçi kısmımızı oluşturduktan sonra diğer sorgumuzu alta yazarız
+WHERE rental_rate=0.99;
+
+
 Karşılaştırma Operatörleri
 Yukarıda da bahsettiğimiz üzere WHERE anahtar kelimesi koşul ile birlikte çalışır. Aşağıda SQL ile birlikte kullanılan karşılaştırma operatörlerini görebilirsiniz.
 
 
-
+<hr>
 ![image](https://user-images.githubusercontent.com/66878884/175478137-55039ac0-a48c-4932-a4e6-0403b95a61e3.png)
+<hr>
+
 
 
 
