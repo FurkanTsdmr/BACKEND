@@ -56,7 +56,7 @@ Nesneye Yönelik Veritabanı
 İlişkisel veritabanı yönetim sistemlerinde veriler satır ve sütunlarında oluşan tablolarda tutulur. 
 Her sütunda aynı tür verilerin tutulması sebebiyle yüksek bir veri tutarlılığına sahiptir.
 
-				                SQL (Structured Query Language) Nedir?
+				             SQL (Structured Query Language) Nedir?
 SQL Türkçe ifadesiyle yapılandırılmış sorgu dili anlamına gelmektedir. Biz SQL sayesinde verilerimizin bulunduğu veritabanı ile iletişime geçeriz.4.nesil programlama dili olarakta ifade edilir
 (giderek makine dilinden insan diline yaklaşıldıgını ifade eder.).
 
