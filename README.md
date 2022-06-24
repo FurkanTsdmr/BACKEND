@@ -270,7 +270,30 @@ BU SORGUMUZDA RENTAL_RATE'DE 4.99 VE REPLACEMENT_COST'TA 20.99 U GÖRÜRÜZ BUNU
 -----------------------------------------------------------------------
 SELECT * FROM film
 WHERE NOT (NOT(rental_rate=4.99 AND replacement_cost=20.99));
-BU SORGUMUZDA İSE BİZE 4.99 VE 20.99 OLANLARI GETİRİR NEDENİ 2 ADET NOT KULLANDIGIMIZ İÇİN BİRBİRLERİNİN TÜMLEYENLERİ OLUP SORGU İÇERİSİNDEKİLE GETİR DEMEK OLUYOR.
+BU SORGUMUZDA İSE BİZE 4.99 VE 20.99 OLANLARI GETİRİR NEDENİ 2 ADET NOT KULLANDIGIMIZ İÇİN BİRBİRLERİNİN TÜMLEYENLERİ OLUP SORGU İÇERİSİNDEKİLE GETİR DEMEK OLUYOR.YANİ İÇERİDE Kİ 2 NOT BİRBİRİNİ YOK EDER.
+-----------------------------------------------------------------------
+SELECT * FROM film
+WHERE NOT length > 110; uzunlugu 110'dan küçük olanları getirir.
+SELECT * FROM film
+WHERE NOT NOT length > 110; oldugu zaman ise dediğimiz gibi uzunlugu 110'dan büyük olanları getiriyor.
+-----------------------------------------------------------------------
+SELECT * FROM actor
+WHERE first_name='Penelope' AND last_name='Monroe'
+OR first_name='Joe' AND last_name='Swank';
+
+BİZ HER OR KULLANDIGIMIZ ZAMAN SANKİ BAŞTAN YENİ BİR FİLTRELEME BAŞLAMIŞ GİBİ DÜŞÜNECEĞİZ O NEDENLE ÖNCEKİLERE DİKKAT ETMEZ VE AYNI ZAMANDA GİDİP JOE'YU GETİRİR.
+![image](https://user-images.githubusercontent.com/66878884/175505407-e26f7954-a11a-4a6d-8e9d-11940b2bfeca.png)
+BİLEREK LAST_NAME'İ YANLIŞ YAZDIMIZ ZAMAN SADECE PENELOPE'Yİ GETİRİR BİZE.
+![image](https://user-images.githubusercontent.com/66878884/175505426-e4e285c2-0eac-44c0-a854-b094cac34f93.png)
+
+-----------------------------------------------------------------------
+SELECT * FROM actor
+WHERE first_name='Penelope' AND last_name='Monroe' 
+AND last_name='Swanks' OR first_name='Joe'
+BU KOŞULDA PENELOPE'YE BAKAR SONRA LAST_NAME'E BAKAR VE SONRA BİR SONRAKİ AND'E BAKAR VE OLMADIGI İÇİN BİZİM SORGUMUZ OR'A GEÇER VE YALNZICA İLK İSMİ JOE'OLANI GETİRİR.
+
+
+![image](https://user-images.githubusercontent.com/66878884/175505875-7e62b01e-33d0-44dc-b990-a6df9148fea3.png)
 
 
 
