@@ -491,9 +491,11 @@ SELECT COUNT(DISTINCT length) FROM film;
 ilk olarak uzunlugu istediğimiz için length'i yazarız sonra birbirinden farklı olamsını istediğimiz için DISTINCT'i kullanıyoruz fakat tek başlarına kullanılması bizim istediğimiz sonucu vermeyecektir bundan dolayı onları bize bu (DISTINCT length) filtrelemyi sağlayan kaç adet oldugunu öğrenmek için COUNT(DISTINCT length)parantezine alıp işlemimizi yaparız.
 Birbirinden uzunlukları farklı kaç tane filmimizin oldugunu öğrenmek için kullanırız ve çıktısı ;
 ![image](https://user-images.githubusercontent.com/66878884/175759896-5f391e04-ef72-4e21-8e96-c76e706f6b77.png)
+Count kullanmadan olan çıktısı 
 --------------------------------------------
-
-
+Uzayıp gidiyor kaç adet olduguna göre.
+![image](https://user-images.githubusercontent.com/66878884/175759952-d80a52e3-ab5f-4669-abdb-88fbf90903e6.png)
+--------------------------------------------
 
 
 
