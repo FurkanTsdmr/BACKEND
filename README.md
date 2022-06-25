@@ -482,7 +482,16 @@ Count ile kullandığımızda Penelope isimli kaç adet kullanıcı olduğunu d�
 Burda Count(*) yazmamızın sebebi Count aynı length()'inde oldugu gibi bir fonksiyon olduğu içindir.
 --------------------------------------------
 
-
+BENİM BİRBİEİNDEN FARKLI KAÇ TANE first_name'imimiz var bu seneryoyu doğrulayan fonksiyonumuz
+SELECT COUNT(DISTINCT first_name) FROM actor;D
+ÇIKTISIDA;
+![image](https://user-images.githubusercontent.com/66878884/175759832-7294f0d3-dd3d-4741-9187-adacd8b55089.png)
+--------------------------------------------
+SELECT COUNT(DISTINCT length) FROM film;
+ilk olarak uzunlugu istediğimiz için length'i yazarız sonra birbirinden farklı olamsını istediğimiz için DISTINCT'i kullanıyoruz fakat tek başlarına kullanılması bizim istediğimiz sonucu vermeyecektir bundan dolayı onları bize bu (DISTINCT length) filtrelemyi sağlayan kaç adet oldugunu öğrenmek için COUNT(DISTINCT length)parantezine alıp işlemimizi yaparız.
+Birbirinden uzunlukları farklı kaç tane filmimizin oldugunu öğrenmek için kullanırız ve çıktısı ;
+![image](https://user-images.githubusercontent.com/66878884/175759896-5f391e04-ef72-4e21-8e96-c76e706f6b77.png)
+--------------------------------------------
 
 
 
