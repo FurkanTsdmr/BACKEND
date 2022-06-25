@@ -533,10 +533,17 @@ PSQL, PostgreSQL ile birlikte gelen terminal tabanlı bir kullanıcı arayüzüd
 ![image](https://user-images.githubusercontent.com/66878884/175762906-d9926b54-926d-4901-9f24-26758d548b08.png)
 
 --------------------------------------------
+FARKLI SATIRLARA YAZIP GÖSTERİM ŞEKLİ. SONDA ; KOYMAMIZIN NEDENİ İLLA Kİ ; SON SATIRDA OLACAK DİYE BİR KAİDE YOK ÖYLE BİR DURUMDA YOK SORGUYU BİTİREMEK İÇİN UZATMAMAK VE 2.3. VS. DİĞER SATIRLARDA ; KOYMAZSAK DEVAM EDEBİLECEĞİMİZİ GÖRMEMİZ İÇİNDİ.
+![image](https://user-images.githubusercontent.com/66878884/175762969-f7232bf1-1095-473c-83f5-66d80b387256.png)
+
+--------------------------------------------
+
 customer tablosunda bulunan first_name değeri ve last_name değeri 'A' karakteri ile başlayan verileri sıralayınız.
 SELECT * 
 FROM customer
 WHERE first_name LIKE 'A%' AND last_name LIKE 'A%';
+![image](https://user-images.githubusercontent.com/66878884/175763025-5f6b713e-3d88-415b-93a1-088f5f63f38a.png)
+
 film tablosunda bulunan ve uzunluğu 80 ile 120 arasında bulunan ve aynı zamanda rental_rate değeri 0.99 veya 2.99 olan verileri sıralayınız.
 SELECT * 
 FROM film
@@ -544,10 +551,34 @@ WHERE (length BETWEEN 80 AND 120) AND (rental_rate IN (0.99, 2.99));
 PSQL terminal ekranından çıkmak için:
 \q
 
+--------------------------------------------
+
+ilk ismi A ile son ismi G ile başlasın sayısını yakalamak için
+
+![image](https://user-images.githubusercontent.com/66878884/175763083-dcb5002a-7225-47e5-8079-94596dfd556a.png)
+
+--------------------------------------------
 
 
 
 
+![image](https://user-images.githubusercontent.com/66878884/175763170-60d530d2-a53d-4825-8161-894e20a4d781.png)
+
+
+--------------------------------------------
+İsminden en az 2 tane a olsun 100dk'dan daha uzun replacement_cost 15'ten büyük 25'ten küçük rental_rate 2.99
+SELECT * FROM film
+WHERE (title ILIKE ('%a%a%')) AND (length > 100) AND (replacement_cost > 15 AND replacement_cost < 25) AND rental_rate=2.99;
+![image](https://user-images.githubusercontent.com/66878884/175764122-a1cdb0b2-e4fe-4338-a12d-94ecc5c6d2d4.png)
+--------------------------------------------
+T ile Başlayan filmlerin kaç farklı dakikaya sahip uzunlukları vardır.
+kaç farklı derken kaç tane olacagını bulacağımız için COUNT
+kaç farklı dakikaya derken ise unique var DISTINCT kullanacağız
+
+SELECT COUNT(DISTINCT length) FROM film
+WHERE title LIKE 'T%';
+![image](https://user-images.githubusercontent.com/66878884/175764229-537722fb-5dbf-454e-a4fa-de1c6a788089.png)
+--------------------------------------------
 
 
 
