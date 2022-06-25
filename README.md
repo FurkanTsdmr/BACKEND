@@ -657,6 +657,116 @@ ORDER BY length DESC;
 
 
 
+						LIMIT ve OFFSET
+LIMIT
+Şimdiye kadar yaptığımız SQL sorgularında genellikle verilerin tamamını belirli koşullar altında sıraladık. Bazı durumlarda ise koşullarımızı sağlayan verilerin tamamını değil belirli sayıda olanlarını sıralamak isteriz, bunun için LIMIT anahtar kelimesini kullanırız.
+
+-> ÖNCE KOŞULLARIMIZA GÖRE VERİLERİ ALIYORUZ SINRA VERİLERİ SIRALIYORUZ SONRA DA KAÇ TANE VERİ GÖRMEK İSTİYORSAK LİMİT ANAHTARI ATIYORUZ.
+
+
+Şöyle bir senaryo üzerine düşünelim. dvdrental veritabanında bulunan film tablosundan B ile başlayan filmleri uzunluklarına göre en uzun olan 10 filmi sıralayalım.
+
+SELECT *
+FROM film
+WHERE title LIKE 'B%'
+ORDER BY length DESC
+LIMIT 10;
+Yukarıdaki sorgumuzda da görmüş olduğunuz gibi önce koşullamayı, sonra gruplamayı en son ise LIMIT kullanarak istediğimiz veri sayısını belirttik.
+
+--------------------------------------------
+SELECT * FROM film
+LIMIT 20
+20 tane film verisini getirir bize.
+--------------------------------------------
+SELECT * FROM film
+WHERE rental_rate=4.99 
+ORDER BY length
+LIMIT 20;
+rental_rate'i 4.99 olan lengthleri azalandan başlatarak 20 adet listemizi getirir.
+--------------------------------------------
+SELECT * FROM film
+WHERE replacement_cost = 14.99 AND rental_rate=0.99
+UZUNLUKLARI EN UZUNDAN EN KISAYA (AZALAN) sıralamamız lazım VE DESC yazıyoruz SONRA LIMITIMIZI GİRİYORUZ
+VE EN UZUN 7 FILMI ALMAK İÇİN LIMITLIYORUZ.
+ORDER BY length DESC
+LIMIT 10;
+
+![image](https://user-images.githubusercontent.com/66878884/175768438-53e2b86d-edc8-40c6-9d86-c08be8832afe.png)
+--------------------------------------------
+OFFSET
+Bazı durumlarda sonuç olarak gördüğümüz veri grubu içerisinden bazılarını "pass" geçmek isteriz. Yukarıdaki senaryomuzu tekrar düşünelim, dvdrental veritabanında bulunan film tablosundan B ile başlayan filmleri uzunluklarına göre sıralayalım ancak en uzun 6 filmi "pass" geçelim ve sonrasındaki 4 filmi sıralayalım. Bu durumda LIMIT 4 ve OFFSET 6 olacak.
+WHERE title LIKE 'B%'
+ORDER BY length DESC
+SELECT *
+FROM film
+OFFSET 6
+LIMIT 4;
+--------------------------------------------
+SELECT * FROM country
+ORDER BY 6
+LIMIT 4;
+ilk 6 veriyi geçip sonrasında belirlediğimiz 4 verisi gelir.
+![image](https://user-images.githubusercontent.com/66878884/175768491-1c773642-e55d-4cde-8e73-c8d2e83531f1.png)
+--------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
