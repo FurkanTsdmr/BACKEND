@@ -501,7 +501,7 @@ Uzayıp gidiyor kaç adet olduguna göre.
 
 				PSQL ve Uygulama I
 PSQL
-PSQL, PostgreSQL ile birlikte gelen terminal tabanlı bir kullanıcı arayüzüdür. PSQL sayesinde komut satırında sorgular yazıp, sonuçlarını görebiliriz. Aşağıda temel PSQL komutlarının ilk bölümünü bulabilirsiniz.
+
 
 PSQL ile PostgreSQL'e bağlanmak.
 psql -U <kullanıcı_adı>
@@ -509,13 +509,30 @@ Kullanıcıya ait şifreyi girdikten sonra varsayılan veritabanı postgres'e ba
 postgres=#
 Bulunan veritabanlarını listelemek için:
 \l veya \list
+![image](https://user-images.githubusercontent.com/66878884/175762741-8ad836fd-29c2-4798-95a3-d2c6b3146237.png)
+--------------------------------------------
 Bizim örneğimizde dvdrental veritabanına bağlanacağız.
 \c dvdrental veya \connect dvdrental
+![image](https://user-images.githubusercontent.com/66878884/175762738-5fadf14f-ba4b-43e7-96df-1953d61380de.png)
+--------------------------------------------
 Bağlanılan dvdrental veritabanında bulunan tabloları listelemek için:
 \dt
+![image](https://user-images.githubusercontent.com/66878884/175762728-6b292dff-0b4a-4bef-afd6-a1b2b86c0be6.png)
+--------------------------------------------
 Herhangi bir tablonun sütunlarını ve tablo detaylarını görmek için:
 \d <tablo_adı>
+![image](https://user-images.githubusercontent.com/66878884/175762762-3c671297-93fa-4396-bca4-4b4f8612f6bf.png)
+--------------------------------------------
 Örnek Sorgu Senaryoları
+SELECT * FROM actors WHERE first_name='Penelope';
+![image](https://user-images.githubusercontent.com/66878884/175762811-eeac6058-3cba-485b-bf61-48a1a94a41ae.png)
+
+TERMİNAL EKRANIMIZDA ; KULLANMAK ZORUNDAYIZ!!!!
+ŞUNDAN DOLAYI GÖSTERMİŞ OLDUGUM ÖRNEKTE dvrental=# İŞARETİ İLE SORGUMUZU YAPTIK VE SONUNA ; KOYDUGUMUZDA SORGUNUN BİTTİĞİNİ VE BİZE CEVAP DÖNMESİ GEREKTİĞİNİ ANLAR FAKAT BİR EĞER Kİ BİRDEN ÇOK SATIRDA SORGUMUZU YAPACAKSAK EĞER O ZAMAN ; KOYMAYIZ VE dvdrental-# ŞEKLİNE DÖNÜŞÜR VE BURDA BİZE SEN SORGUNU YAZDIN FAKAT BİTİRMEDİN DER VE BİZ ALT SATIRDAN DA pgAdmin SAYFASINDA YAPTIGIMIZ GİBİ SORGUMUZU YAPABİLİRİZ. 
+PSQL, PostgreSQL ile birlikte gelen terminal tabanlı bir kullanıcı arayüzüdür. PSQL sayesinde komut satırında sorgular yazıp, sonuçlarını görebiliriz. Aşağıda temel PSQL komutlarının ilk bölümünü bulabilirsiniz.
+![image](https://user-images.githubusercontent.com/66878884/175762906-d9926b54-926d-4901-9f24-26758d548b08.png)
+
+--------------------------------------------
 customer tablosunda bulunan first_name değeri ve last_name değeri 'A' karakteri ile başlayan verileri sıralayınız.
 SELECT * 
 FROM customer
@@ -525,8 +542,8 @@ SELECT *
 FROM film
 WHERE (length BETWEEN 80 AND 120) AND (rental_rate IN (0.99, 2.99));
 PSQL terminal ekranından çıkmak için:
-
 \q
+
 
 
 
