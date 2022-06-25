@@ -402,8 +402,9 @@ ILIKE operatörü LIKE operatörünün case - insensitive versiyonudur.
 LIKE: Büyük küçük(case-sensivity) hassasiyeti vardır.
 ~~ : İşaretide LIKE anlamına gelir.
 ILIKE: Case-sensivity hassasiyeti yoktur.
+~ ~ * : BİRLEŞİK ŞEKİLDE YAZILIR VE ANLAMI ILIKE ANLAMINA GELİR.
 
-
+! : NOT ANLAMINA GELİR.
 
 WHERE first_name LIKE 'M%' M ile başlayan isimleri bize getirir 'MA%' diyip te sınır koyabiliriz herhangi bir sınır yoktur bir de '%y' kullanımı vardır buda son harfi arar yani burda son harfi 'y' olanları ara diyoruz.
  
@@ -437,19 +438,49 @@ WHERE first_name LIKE 'J%n' ;
 Burda ise J ile başlayan n ile sonlanan tüm isimleri getirir.
 --------------------------------------------
 SELECT * FROM actor
-WHERE first_name ~~ 'A%' 
-~ ~ 
+WHERE first_name !~ ~* 'B%' 
+BAŞ HARFİ KÜÇÜK B İLE BAŞLAYANLRI LİSTELER.
+--------------------------------------------
 
+				 DISTINCT ve COUNT
+DISTINCT(Unique-Benzersiz): Farklı ifadaeleri görmek için kullanırız.
+Şimdiye kadar yaptığımız SQL sorgularında genellikle verileri belirli koşullar altında sıraladık. Dikkat ettiyseniz bir çok durumda aynı sütün içerisinde birbirinin aynı olan veriler ile karşılaştık. Örneğin dvdrental veritabanı içerisinde bulunan film tablosundaki replacement_cost, rental_rate gibi sütunlar birbirini tekrar eden verilerden oluşmaktadır. Bazı durumlarda bir sütun içerisinde bulunan farklı değerleri görmek isteriz.
 
+SELECT DISTINCT rental_rate 
+FROM film;
+sorgusu bize rental_rate sütununda bulunan birinden farklı 2.99, 0.99, 4.99 verilerini gösterir.
+Yani rantel_rate 3 ader farklı veri barındırıyormuş içerisinde.
 
+SELECT DISTINCT Söz Dizimi
+SELECT DISTINCT <sütun_adı>, <sütun_adı>, ...
+FROM <tablo_adı>;
+COUNT
+COUNT aggregate fonksiyonu ilgili sorgu sonucunda oluşan veri sayısını bildirir. Aşağıdaki sorguda ismi 'Penelope' olan aktörleri sıralıyoruz.
+--------------------------------------------
+SELECT DISTINCT City,Country FROM Customers;
+w3school'da örnekleri yaparken böyle bir öenk yaptıgımız zaman bize 
+![image](https://user-images.githubusercontent.com/66878884/175759585-ad194efd-8a1a-4a68-875c-02a6116fe5b8.png)
+bu şekil bir döndü döndürüyor burda 1'den fazla Germany olması hata oldugu anlamına gelmiyor biz 2 sütunu 1 olarak düşüneceğiz, devam eden ikili verilerin diğerlerinden farklı oldugunu düşüneceğiz.
+--------------------------------------------
 
+SELECT * 
+FROM actor
+WHERE first_name = 'Penelope';
+ancak veri sayısını bulmak istersek COUNT fonksiyonunu kullanırız.
+--------------------------------------------
+Count: biz ilk olarak ne yapıyoruz verileri listeliyoruz ve sonrasında belirli bir filterelemden geçiyoruz ve Count bize bu filtremizin yani şartlarımızı sağlayan veri sayısını döner bize. 
+SELECT COUNT(*)
+FROM actor
+WHERE first_name = 'Penelope';
+Yukarıda da belirttiğimiz gibi COUNT fonksiyonu ile sorgu sonucunda ortaya verileri sayıyoruz. Bu nedenle COUNT(*) veya COUNT(sütun_adı) aynı sonucu verir.
+--------------------------------------------
+Normal kullanımda 4 adet Penelope kullanıcısının oldugu dönüyor.
+![image](https://user-images.githubusercontent.com/66878884/175759685-85c083cc-4cd7-4505-b213-1ebc0465a3bc.png)
 
-
-
-
-
-
-
+Count ile kullandığımızda Penelope isimli kaç adet kullanıcı olduğunu dönüyor.
+![image](https://user-images.githubusercontent.com/66878884/175759673-edd4b7f1-e0d5-4639-872c-b7bab317125c.png)
+Burda Count(*) yazmamızın sebebi Count aynı length()'inde oldugu gibi bir fonksiyon olduğu içindir.
+--------------------------------------------
 
 
 
