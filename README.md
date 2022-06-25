@@ -710,12 +710,160 @@ ilk 6 veriyi geçip sonrasında belirlediğimiz 4 verisi gelir.
 --------------------------------------------
 
 
+<hr>
 
 
+				Aggregate Fonksiyonlar - MIN, MAX, SUM, AVG
+Aggregate fonksiyonları yardımıyla bizler veri kümelerimizden sonuçlar(genel veriler) çıkarabiliriz. Ne demek istiyorum? Şu senaryoları düşünelim.
+
+Toplam kaç adet müşterimiz var?
+Elimizde bulunan filmlerin ortalama uzunluğu nedir?
+Bu şekilde belirli veri kümelerinden tek bir sonuç çıkarmak için aggregate fonksiyonları kullanırız.
+
+Örnek Kullanımlar
+AVG fonksiyonunu kullandığımız sayısal değerlerden oluşan sütunun ortalama değerini alırız.
+
+SELECT AVG(length) 
+FROM film;
+sorgusu sayesinde film tablosunda bulunan length sütunundaki değerlerin ortalamasını alırız. SUM fonksiyonunu kullandığımız sayısal değerlerden oluşan sütunun toplam değerini alırız.
+
+SELECT SUM(length) 
+FROM film;
+sorgusu sayesinde film tablosunda bulunan length sütunundaki değerlerin toplamını alırız. MAX fonksiyonunu kullandığımız sayısal değerlerden oluşan sütunun en yüksek değerini alırız.
+
+SELECT MAX(length) 
+FROM film;
+sorgusu sayesinde film tablosunda bulunan length sütunundaki değerlerin en yüksek değerini alırız. MIN fonksiyonunu kullandığımız sayısal değerlerden oluşan sütunun en düşük değerini alırız.
+
+SELECT MIN(length) 
+FROM film;
+sorgusu sayesinde film tablosunda bulunan length sütunundaki değerlerin en düşük değerini alırız.
 
 
+--------------------------------------------
+ACABA TOPLAMDA KAÇ VERİMİZ VAR ?
+SELECT COUNT(*) FROM film;
+--------------------------------------------
+EN YÜKSEK REPLECAMENT_COST'UMUZ NEDİR ?
+Bu şekilde EN YÜKSEK gibi MAX'I kullanacağız
+SELECT MAX(replacement_cost) FROM film
+![image](https://user-images.githubusercontent.com/66878884/175772540-19bf7ede-9134-4758-b2df-cbb4b78951da.png)
+--------------------------------------------
+EN DÜŞÜK REPLECAMENT_COST'UMUZ NEDİR ?
+SELECT MIN(replacement_cost) FROM film
+![image](https://user-images.githubusercontent.com/66878884/175772551-4a80769c-50a3-4c57-9208-4d5ea382fa4d.png)
+--------------------------------------------
+ACABA FİlMLERİMİZİN ORTALAMASI NEDİR ?
+SELECT AVG(length) FROM film
+![image](https://user-images.githubusercontent.com/66878884/175772584-564a76e3-8353-49fe-83a4-e6f7066f2973.png)
+ONDALIK KISMINDA GEREKSİZ ŞEKİLDE SIFIRLAR VAR ONLARI KALDIRMAK İÇİN;
+SELECT ROUND(AVG(length),3) FROM film
+TÜM FİLMLERİN UZUNLUKLARININ ORTALAMASINI .'DAN SONRA 3 ONDALIK ŞEKLİNDE BİZİM BELİRTTİĞİMİZ GİBİ GETİRİR.
+ROUND(HANGİ DEĞERİ ROUND ETMEK İSTİYORSAK O DEĞER(LENGTH),KAÇ KARAKTERE KADAR YUVARLAYACAGIMIZI YAZARIZ)
+![image](https://user-images.githubusercontent.com/66878884/175772672-1348bfa3-b7df-44bf-af51-edb39fb274f1.png)
+--------------------------------------------
+SUM
+RENTAL_RATE'LERIN TOPLAMI
+SELECT SUM(rental_rate) FROM film
+![image](https://user-images.githubusercontent.com/66878884/175772703-b4f6971b-5100-452e-8be8-e242f6d34e04.png)
+--------------------------------------------
+SELECT MAX(length),MIN(length),SUM(replacement_cost) FROM film
+EN UZUN FİLMİMİZİ,EN KISA FİLMİMİZİ,REPLACEMENT_COST'LARIN TOPLMAI
+![image](https://user-images.githubusercontent.com/66878884/175772747-861733aa-f0af-497c-b836-6b4a91720272.png)
+--------------------------------------------
+BENİM RANTEL_RATE ORANIM 0.99 OLAN EN UZUN FİLMİ BULMA ?
+SELECT MAX(length) FROM film
+WHERE rental_rate=0.99
+![image](https://user-images.githubusercontent.com/66878884/175772780-bedcf9aa-44b1-4d8f-a425-42fcd4aa0921.png)
+
+--------------------------------------------
+HER FARKLI RANTEL_RATE DEĞERİ İÇİN O RANTEL RANTE'E AİT EN UZUN FİLMİ BULMA
+
+--------------------------------------------
+<hr>
 
 
+							GROUP BY
+Bizler şimdiye kadar olan sorgularımızın tamamında sorguları yaparken genel veri kümesinin tamamı üzerine düşündük, ancak bazı durumlarda aynı sonuçları veri kümesinin içerisinde bulunan farklı gruplarda da bulmak isteyebiliriz. Senaryomuzu şu şekilde düşünelim, dvdrental veritabanında rental_rate sütununda bizim 3 farklı değerimiz var (0.99, 2.99, 4.99). Biz bu 3 farklı değer için en uzun filmi bulmaya çalışalım.
+
+![image](https://user-images.githubusercontent.com/66878884/175775977-dc17fdc4-f300-4d02-928f-94fa4ff06537.png)
+
+
+SELECT MAX(length) 
+FROM film
+WHERE rental_rate = 0.99;
+SELECT MAX(length) 
+FROM film
+WHERE rental_rate = 2.99;
+SELECT MAX(length) 
+FROM film
+WHERE rental_rate = 4.99;
+İstediğimiz sonuçları elde ediyoruz ancak şöyle bir sorunumuz var 3 farklı değer yerine 30 farklı değer olsaydı? İşte bu şekilde senaryolar için yani verileri gruplama için GROUP BY anahtar kelimesi kullanılır.
+
+GROUP BY Söz Dizimi
+SELECT <sütun_adı>, <sütun_adı>, ... (veya aggregate func)
+FROM <tablo_adı>
+GROUP BY <sütun_adı>, <sütun_adı>, ...
+
+Burada şuna dikkat etmemiz gerekir, SELECT anahtar kelimesinde bulunan sütunların GROUP BY anahtar kelimesi içerisinde bulunması gerekir.
+
+GROUP BY Örnek Kullanım
+Yukarıdaki senaryomuzu GROUP BY anahtar kelimesini kullanarak gerçekleştirelim. Dikkat ettiğiniz üzere SELECT ile kullanılan rental_rate sütunu GROUP BY satırında da kullanılmıştır.
+
+SELECT rental_rate, MAX(length) 
+FROM film
+GROUP BY rental_rate;
+![image](https://user-images.githubusercontent.com/66878884/175776152-9b227442-7e11-4e2f-b669-50d2c6c9e44a.png)
+
+--------------------------------------------
+SELECT rental_rate,COUNT(*) FROM film
+GROUP BY rental_rate
+![image](https://user-images.githubusercontent.com/66878884/175776175-7c1b455c-5a21-4103-bae1-2d1c4efaeafe.png)
+--------------------------------------------
+SELECT rental_rate,title,COUNT(*) FROM film
+GROUP BY rental_rate
+BİZLER 2 ADET DEĞİŞKEN YAZABİLİRİZ YA GROUP BY 'DA KULLANILAN SÜTUN İSMİ YA DA aggregate FONKSİYON YAZABİLİRİZ.
+BİZ 3.DEĞİŞENİ (TİTLE) YAZDIGIMIZDA İSE BİZE AŞAĞIDA Kİ GROUP BY HATASINI VERİR. title sütununu görmek istiyorsan burda ki group by ifadesinde de bulunmak zorundadır diyor. 
+![image](https://user-images.githubusercontent.com/66878884/175776216-ddcc5151-53f2-406f-95fb-ff0816c90484.png)
+
+--------------------------------------------
+SELECT rating,COUNT(*) FROM film
+GROUP BY rating;
+
+-- Her bir Rating için bu ratinglere karşılık gelen toplam kaç filmimizin oldugunu bulma
+-- Film sayımızı COUNT'tan ubluyoruz ve grouplamamızı bir alttan satırdan yapıcaz
+![image](https://user-images.githubusercontent.com/66878884/175776386-ef4786fb-69a8-4803-8baa-76797e42e549.png)
+
+--------------------------------------------
+SELECT replacement_cost,MIN(length) FROM film
+GROUP BY replacement_cost;
+-- Her bir replacement_cost ifadesine karşılık gelen en kısa filmimimizi bulma
+![image](https://user-images.githubusercontent.com/66878884/175776436-a41b05a1-9749-43c3-81df-214a09ef24bd.png)
+
+
+--------------------------------------------
+SELECT replacement_cost,rental_rate,MIN(length) FROM film
+GROUP BY replacement_cost,rental_rate;
+-- replacement_cost ' U 14.99 REPTAL_RATE'İ 2.99 OLAN EN KISA FİLM 61DK DİYOR
+![image](https://user-images.githubusercontent.com/66878884/175776529-47f76dce-4fb6-4601-be3f-9e6d79af05a3.png)
+-- Toplam 63 tane tablo geliyor bize ben artık rental_rate'in 3 değer aldıgını biliyorum ve bu su demek oluyor demek ki unique olarak 21 tane tablomuz var aynı değerde
+
+SELECT COUNT(DISTINCT replacement_cost) FROM film;
+Sorugumuz ile 
+![image](https://user-images.githubusercontent.com/66878884/175776626-973568f3-4e13-4fd2-b3e2-9bde814e5910.png)
+sonucumuz gelir.
+--------------------------------------------
+
+
+--------------------------------------------
+
+--------------------------------------------
+
+--------------------------------------------
+
+--------------------------------------------
+
+--------------------------------------------
 
 
 
