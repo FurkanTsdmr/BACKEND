@@ -580,5 +580,93 @@ WHERE title LIKE 'T%';
 ![image](https://user-images.githubusercontent.com/66878884/175764229-537722fb-5dbf-454e-a4fa-de1c6a788089.png)
 --------------------------------------------
 
+<hr>
+
+					ORDER BY
+ORDER BY anahtar kelimesi sayesinde bizler verilerimizi herhangi bir sütunda bulunan değerlere göre azalan veya artan bir şekilde sıralayabiliriz.
+SIRALAMA İŞLEMLERİNDE KULLANIRIZ. İLK OLARAK KOŞULLARIMIZI BELİRTİR DEVAMINDA SIRALAMASINI NASIL YAPACAĞIMIZI BELİRTİRİZ.
+
+ORDER BY Söz Dizimi
+SELECT <sütun_adı>, <sütun_adı>, ...
+FROM <tablo_adı>
+ORDER BY <sütun_adı>, <sütun_adı>, ... ASC|DESC;
+ORDER BY Örnek Kullanım
+SELECT *
+FROM film
+ORDER BY title (ASC);
+Bu sorgumuzda dvdrental veritabanında bulunan film tablosundaki tüm sütunları title sütununda bulunan verilere göre artan (ASC) şeklinde sıralıyoruz.
+
+ASC sıralama varsayılan olduğu için ayrı bir şekilde yazılması zorunluluğu yoktur ancak sorguyu belirginleştirmesi açısından genelde yazılır.
+
+SELECT *
+FROM film
+ORDER BY title ASC length DESC;
+Sıralama birden fazla sütuna göre de yapılabilir. Yukarıdaki örneğimizde sıralama title sütununa göre artan length sütununa göre azalan şeklinde yapılıyor.
+ASC:AZALANDAN ARTANA
+DESC:ARTANDAN AZALANA DOGRU SIRALAR.
+SELECT *
+FROM film
+WHERE title LIKE 'A%'
+ORDER BY title ASC length DESC;
+Yukarıdaki örneğimizde de gördüğümüz gibi sıralama işlemi, koşuldan sonra yazılır.
+--------------------------------------------
+SELECT * FROM film
+ORDER BY title;
+Sıralı şekilde listelememize yarar. A-Z'ye doğr
+SELECT * FROM film
+ORDER BY title ASC; Aynı kullanımdır ASC yazmadıgımız zaman yukarıda default olarak ASC olarak alır ve sıralı şekilde listeler.
+SELECT * FROM film
+ORDER BY title DESC;
+DESC: İSE AZALAN ŞEKİLDE YANİ Z-A'YA DOĞRU SIRALAR.
+![image](https://user-images.githubusercontent.com/66878884/175765892-0e1baddc-e5e2-4dd0-806e-02a0f583fccb.png)
+
+--------------------------------------------
+SELECT title,length FROM film
+ORDER BY length DESC;
+Burdaki order'ı sıralamayı azalana göre yaparız
+
+![image](https://user-images.githubusercontent.com/66878884/175766002-9a7deb65-071f-44b3-a670-c7b7ea5aa9f7.png)
+
+--------------------------------------------
+
+ÖNCELİKLE RANTEL_RATE'E GÖRE ARTAN,LENGTH'E GÖRE AZALAN ŞEKİLDE SIRALAMA
+SELECT title,rental_rate,length FROM film
+ORDER BY rental_rate ASC, length DESC; 
+
+![image](https://user-images.githubusercontent.com/66878884/175766068-344f9a6d-4756-4fda-94bb-d0fcdad37057.png)
+
+--------------------------------------------
+YALNIZCA A İLE BAŞLAYAN, RENTAL_RATE'E GÖRE ARTAN LENGTH'E GÖRE AZALAN.
+
+SELECT title,rental_rate,length FROM film
+WHERE title LIKE 'A%'
+ORDER BY rental_rate ASC, length DESC; 
+
+![image](https://user-images.githubusercontent.com/66878884/175766108-2c2ca48b-b201-482b-8100-e4c9f55ad229.png)
+--------------------------------------------
+
+RATİNG'İ G YE EŞİT OLAN FİLMLERİ UZUNLUKLARINA GÖRE ARTACAK ŞEKİLDE SIRALAMA.
+SELECT * FROM film
+WHERE rating = 'G'
+ORDER BY length DESC;
+![image](https://user-images.githubusercontent.com/66878884/175766188-9e8bfa2e-dd22-482e-822e-4e8e404efa7b.png)
+
+--------------------------------------------
+
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
