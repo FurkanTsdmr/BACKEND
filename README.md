@@ -853,13 +853,86 @@ Sorugumuz ile
 ![image](https://user-images.githubusercontent.com/66878884/175776626-973568f3-4e13-4fd2-b3e2-9bde814e5910.png)
 sonucumuz gelir.
 --------------------------------------------
+MANTGIMIZ İLK VERİLERİ SIRALARI SONRA ONLARI GRUPLAR SONRASINDA O GURUPLADIUKLARIMIZI SIRALIYORUZ.
+ONDAN DOLAYI ORDER BY - GROUP'TAN SONRA SIRALANIR.
+SELECT replacement_cost,rental_rate,MIN(length) FROM film
+GROUP BY replacement_cost,rental_rate
+ORDER BY replacement_cost, rental_rate DESC;
+replacement_cost'u artana göre rental_rate'i azalana göre sıralar.
+![image](https://user-images.githubusercontent.com/66878884/175776706-7e9f4d7b-b736-4a98-850d-8f65635f3f9e.png)
+
+<hr>
+
+						HAVING
+HAVING anahtar kelimesi sayesinde gruplandırılmış verilere koşullar ekleyebiliriz. Hemen aklımıza WHERE anahtar kelimesi geldi değil mi? Ancak WHERE anahtar kelimesi ile biz satır bazlı koşullar verebiliyoruz.
+
+HAVING:GRUP BAZLI FİLTRE UYGULAR.
+WHERE: SATIR BAZLI FİLTRE UYGULAR ARALARINDA Kİ EN BÜYÜK FARK BUDUR.
+
+Şöyle bir senaryomuz olsun. Her bir rental_rate oranına karşılık gelen film sayısını bulalım. Bunu GROUP BY ile gerçekleştirebiliriz. Ancak bu kez 1 adım öteye gidip şöyle bir koşul ekleyelim toplam film sayısı 325 ten fazla olan rental_rate oranlarını görelim. Bu durumda GROUP BY ile elde ettiğimiz toplam film sayılarına koşul eklememiz gerekir.
+
+--------------------------------------------
+FİLM SAYISI 325'TEN BÜYÜK OLAN RANTEL_RATELERİ GETİRİR.
+HAVING İLE GRUPLANMIŞ VERİLERE KOŞUL VERDİK.
+SELECT rental_rate, COUNT(*) FROM film
+GROUP BY rental_rate
+HAVING COUNT(*) > 325;
+--------------------------------------------
+--KAÇ TANE SATIŞ YAPILDI.
+SELECT COUNT(*) FROM payment
+--------------------------------------------
+--çalışanlara göre gruplayıp her bir çalışan kaçar tane satış yapmış.
+SELECT staff_id,COUNT(*) FROM payment
+ GROUP BY staff_id;
+--------------------------------------------
+--Toplam satısı 7300'den büyük olan çalışanı getirme
+SELECT staff_id,COUNT(*) FROM payment
+ GROUP BY staff_id
+HAVING COUNT(*) > 7300
+--------------------------------------------
+--Toplamda 100'den daha fazla satıs yapan customer_id leri görme
+SELECT customer_id,SUM(amount) FROM payment
+GROUP BY customer_id
+HAVING SUM(amount) > 100
+ORDER BY SUM(amount) // bunu koyarak aratak sıralama işlemini yaparız.
+--------------------------------------------
+
+<hr>
+
+						ALIAS (AS)
+AS anahtar kelimesi sayesinde sorgular sonucu oluşturduğumuz sanal tablo ve sütunlara geçici isimler verebiliriz.
+
+ALIAS SÜTUN KULLANIMI
+
+SELECT <sütun_adı> AS <geçici_ad>
+FROM <tablo_adı>;
+ALIAS TABLO KULLANIMI
+
+SELECT <sütun_adı>, <sütun_adı>...
+FROM <tablo_adı> AS <geçici_ad>;
+
 
 
 --------------------------------------------
+SELECT first_name AS isim,last_name AS soyisim FROM actor
+YALNIZCA SIRALADIGIMIZ VERİLERİN SÜTUNLARININ İSİMLERİNİ DEĞİŞTİRİYORUZ.GERÇEKTE DEĞİŞMEZ.O SORGU İÇERİSİNDE BİZE GÖRE DAHA ANLAMLI SIRALIYORUZ.
+YENİ OLUŞTURACAĞIMIZ TABLOYA 1 DEN FAZLA FAZLA KELİME VEYA KARAKTER VERECEK OLURSAK O ZAMAN "" İÇERİSİNE ALMAMIZ LAZIM.
+TEK VERİDĞİMİZ ZAMAN "" İÇERİSİNE ALMAYA GEREK YOK.
+SELECT first_name  isim,last_name  soyisim FROM actor AYNI SONUCU ALIRIZ AS ' İ KOYUP KOYAMAMK ÖNEMLİ DEĞİL.
+![image](https://user-images.githubusercontent.com/66878884/175781461-65889350-841d-4496-b94c-25a09219a2a8.png)
+--------------------------------------------
+SELECT first_name "isim test",last_name "soyisim test" FROM actor
+
+![image](https://user-images.githubusercontent.com/66878884/175781577-d34dfac1-b149-4664-b09c-d7050d6c9308.png)
 
 --------------------------------------------
+<hr>
 
+					CONTACT
+SÜTUNLARI BİRLEŞTİRMEYE YARAR KARAKTERLERİ YAN YANA YAZMAMIZDA BİZE YARDIMCI OLUR.
 --------------------------------------------
+SELECT  CONCAT(first_name, ' ', last_name) AS "İsim ve Soyisim" FROM actor
+![image](https://user-images.githubusercontent.com/66878884/175781696-d137cd61-1099-4789-beaa-a7cedaba2317.png)
 
 --------------------------------------------
 
