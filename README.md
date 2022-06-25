@@ -399,12 +399,63 @@ ILIKE operatörü LIKE operatörünün case - insensitive versiyonudur.
 
 
 % : Valcard işareti anlamına gelir ya herhangi bir karakter yoktur ya da birden fazla karakter için yer tututcu işlevi görür.
+LIKE: Büyük küçük(case-sensivity) hassasiyeti vardır.
+~~ : İşaretide LIKE anlamına gelir.
+ILIKE: Case-sensivity hassasiyeti yoktur.
+
+
+
 WHERE first_name LIKE 'M%' M ile başlayan isimleri bize getirir 'MA%' diyip te sınır koyabiliriz herhangi bir sınır yoktur bir de '%y' kullanımı vardır buda son harfi arar yani burda son harfi 'y' olanları ara diyoruz.
  
 --------------------------------------------
 SELECT * FROM customer
 WHERE first_name LIKE 'M%'
 M ile baslayan tüm isimleri almamıza yarar.
+--------------------------------------------
+SELECT * FROM actor 
+WHERE first_name LIKE 'A%y';
+BAş harfi A ile başlıyor ortada ya hiç karakter olmayacak ya da 1'den fazla karakter olacaktır diyip son harfini'de y ile bitiriyoruz bize bunları sağlayan sorguları getiriyor.
+--------------------------------------------
+SELECT * FROM customer 
+WHERE first_name LIKE 'A%' AND last_name LIKE 'A%';
+İlk ismin ve son ismin baş harfları A ile başlayanları sıralar.
+--------------------------------------------
+SELECT * FROM customer 
+WHERE first_name NOT LIKE 'D%n' 
+NOT ile kullanılabilir ve böyle kullanıldıgı zaman bize baş harfi D son harfi n olanların haricindekileri listeler.
+--------------------------------------------
+SELECT * FROM customer 
+WHERE first_name LIKE 'J_an';
+Kullandığımız underscore(_) bize tek karakter için yer tutucu görevini sağlar.(Jean,Joan,Juan) gibi çıktılar verir.
+--------------------------------------------
+SELECT * FROM customer 
+WHERE first_name LIKE 'J_' ;
+Bu kes ise TEK BİR KARAKTERİ KAPSADIĞI İÇİN Jo yu getirir.DİKKAT EDİLMESİ GEREKEN BİR NOKTA ÇOK KARIŞTIRILABİLİYOR.
+--------------------------------------------
+SELECT * FROM customer 
+WHERE first_name LIKE 'J%n' ;
+Burda ise J ile başlayan n ile sonlanan tüm isimleri getirir.
+--------------------------------------------
+SELECT * FROM actor
+WHERE first_name ~~ 'A%' 
+~ ~ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
