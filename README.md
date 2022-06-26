@@ -938,33 +938,110 @@ SELECT  CONCAT(first_name, ' ', last_name) AS "İsim ve Soyisim" FROM actor
 
 --------------------------------------------
 
+<hr>
 
+			Tablo Oluşturmak ve Silmek (CREATE - DROP)
+Tablo Oluşturmak - CREATE
+SQL ile yeni bir tablo oluşturmak için CREATE anahtar kelimesi kullanılır. Tablo oluştururken sonrasında daha detaylı konuşacağımız 3 önemli başlık daha vardır.
 
+Sütunlara verilecek isim, sütunların veri tipi ve varsa sütunlarda bulunan kısıtlama yapıları.
 
+Tablo Oluşturmak - CREATE Söz Dizimi
+CREATE TABLE <tablo_adı> (
+    <sütun_adı> <veri_tip> (kısıtlama_adı>,
+    <sütun_adı> <veri_tip> (kısıtlama_adı>,
+   ....
+);
+--------------------------------------------
+Tablo Oluşturmak - CREATE Örnek Kullanım
+author isminde bir tablo oluşturalım, id, first_name, last_name, email, birthday sütunları olsun. Veri tipleri ve kısıtlama yapılarıyla ilgili sonrasında detaylı olarak konuşacağız.
 
+CREATE TABLE author (
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  email VARCHAR(100)
+  birthday DATE
+);--------------------------------------------
+Tablo Silmek - DROP
+Oluşturduğumuz tabloları silmek için DROP anahtar kelimesi kullanılır.
 
+Tablo Silmek - DROP Söz Dizimi
+DROP TABLE (IF EXISTS) <tablo_adı>;
+Burada IF EXISTS yapısını kullanarak yanlış tablo ismi yazımı durumunda hata mesajı almayı önleriz.
 
+Tablo Silmek - DROP Örnek Kullanım
+"test" isimli tablomuzu silmek istersek;
 
+DROP TABLE IF EXISTS test;
+--------------------------------------------
 
+Sütunların 3 temel özelliği olur;
+-- CREATE TABLE <table_name> (
+--     <column_name> <data_type> <constraint>,
+--     ...
+--     <column_name> <data_type> <constraint>;
+-- )
+1.Sütun ismi <sütun_adı>
+2.Data type <veri_tip>: ilgili sütuna koymak sitediğimiz veri tipidir.(numeric,string,tarih.vs)
+3.<constraint>(ksııtlamaadi):Sütuna yerleştireceğimiz verinin özelliklerini veririz.Primary key,null vs.
+--------------------------------------------
+	
 
+CREATE TABLE author(
+--     Serial numeric ifade verir.Aynı zamanda otomomatik olarak artmasını sağlar verilerin.
+--  PRIMARY KEY:TAblomuzda bulunacak her bir satır için benzersiz tanımlayıcı verir.
+    id SERIAL PRIMARY KEY
+--     VARCHAR(50 50 karaktere kadar string kabul ediyor.
+--     NOT NULL BUradaki kısım boş olamaz tanımlaması.
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100),
+    birthday DATE 
+)
+--------------------------------------------
+INSERT INTO author (id,first_name,last_name,birthday
+	tablolarımıza sütunların eklemnmesini yapıyoruz
+	fakat burda bizim id'yi yazmamıza gerek yok Çünkü onu serüal olarak tanımladıgımız için otomatik olarak kendisi artarak gidecektir numaraları.
 
+)
+INSERT INTO author (first_name,last_name,email,birthday)
+VALUES  
+    ('Haruki','Murakami','haruki@gmail.com','1948-11-06'),
+    ('Sabahattin','Ali','sabahattin@gmail.com','1955-08-06'),
+    ('Sabahattin','Ali','sabahattin@gmail.com','1955-08-06'),
+    ('Sabahattin','Ali','sabahattin@gmail.com','1955-08-06'),
+    ('Sabahattin','Ali','sabahattin@gmail.com','1955-08-06');
 
+--------------------------------------------
+YENİ BİR TABLO OLUSTURUYORUZ FAKAT ŞABLON OLARAK LIKE AUTHOR DİYEREK ONUN ŞABLONUNU KULLANACAGIMIZI BELİRTİYORUZ.
+	VERİLERİ ALMIYORUZ YALNIZCA TABLO ŞABLONUNU ALIYORUZ !
+CREATE TABLE author2 (LIKE author)
+	
+--------------------------------------------
+FARKLI TABLODA Kİ VERİLERİ ALMA
+INSERT INTO author2 İLK OLARAK NEREYE INSERT EDİLECEĞİNİ SONRA NERDEN SELECT EDECEĞİMİZİ SEÇİYORUZ
 
+INSERT INTO author2
+SELECT * FROM author BU şekil kullanımda tüm verileri alıyoruz 
+	,ANCAK
 
+DİYELİM Kİ SEBAHATTIN ALİYİ ALMAK İSTİYORUZ SADECE
+	
+INSERT INTO author2
+SELECT * FROM author
+WHERE first_name = 'Sabahattin';
 
+![image](https://user-images.githubusercontent.com/66878884/175804367-7f8c951b-ebd3-47d4-a970-9fe9bec0d1fd.png)
 
+-------------------------------------------- 
+CREATE TABLE author3 AS 
+SELECT * FROM author; DİYEREK AUTHOR3 ADINDA YENİ BİR TABLO OLUSTUURP İÇİNDE Kİ TÜM VERİERİ ÇEKMEMİZE YARAR.
 
-
-
-
-
-
-
-
-
-
-
-
+--------------------------------------------
+TABLOYU SİLMEK
+DROP TABLE IF EXISTS atuhor2 GENEL TABLOYU SİLMEK İÇİN.
+--------------------------------------------
 
 
 
