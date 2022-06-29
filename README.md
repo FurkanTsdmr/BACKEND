@@ -1092,24 +1092,60 @@ my_apps tablosunda bulunan name sütunundaki verisi 'Tresom' olan satırı silel
 DELETE FROM my_apps
 WHERE name = 'Tresom';
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 --------------------------------------------
+-- id'si 10 olan yazaramızı yeni bir yazarla değiştirme seneryosu
+-- Güncelleme yapacağımız VeriTabanını seçiyoruz.
+UPDATE author
+-- İlk olarak değiştirmek istediğim sütun ismini yazacağım fakat
+-- id otomatik olarak veriliyor bunu değiştirmeyeceğiz ve aynı zamanda o id'de olan yazarı değiştirmek istiyoruz.
+SET first_name = 'Furkan',
+last_name = 'Tasdemir',
+email='furkan.com',
+birthday = '1997-06-06'
+-- eğer ki yukarıda ki gibi direkt güncellersek verilerin tamamamını değiştiririz biz bunu istemiyoruz.
+-- Tek bi veriyi değiştirmek istiyoruz.
+WHERE id = 10	
+Bu değişikliği POSTGRESQL tablonun sonunda gösterir.
+![image](https://user-images.githubusercontent.com/66878884/176409900-5c2dd079-26b3-4426-a956-f05501621537.png)
+        
+--------------------------------------------
+-- İlk isminin baş harfleri V ile başlayan yazarların 
+-- ismini değiştirme seneryosu
+
+UPDATE author
+SET first_name = 'XXXX',
+last_name='YYYY'
+WHERE first_name LIKE 'V%'            
+            
+--------------------------------------------
+Yaptıgımız işlemleri Updateyken de görebiliriz bunun için RETURNİNG anahtar kelimesini kullanırız yani
+-- İSmi odetta olan arkadaşımızın soyismini UPDATET seklinde değiştireceğiz
+UPDATE author
+SET last_name = 'UPDATE'
+WHERE first_name = 'Trev'
+-- BU değişiklik yaptıgımız satırın geri gelmesini istiyoruz bu nedenle
+RETURNING *;
+![image](https://user-images.githubusercontent.com/66878884/176412115-075177eb-1bb4-44f4-8052-eba0e661cd7c.png)
+--------------------------------------------
+Verileri silmek içinde DELETE anahtar kelimesi kullanılır.
+DELETE FROM <table_name>
+WHERE condition	    
+--------------------------------------------	
+-- id'si 6 olan veriyi silme
+DELETE FROM author
+WHERE id=6;	
+--------------------------------------------	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 --------------------------------------------
 
 
