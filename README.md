@@ -1147,7 +1147,22 @@ WHERE id=6;
 	
 
 --------------------------------------------
+/*primery key: Bizim için birinci lanahtar ol. çevrilir. SAtırdı bulşunan veriyi diğer verilerden ayrıstırmak içindir.
+foreign key:Genelde başka bir tabloda ki başka bir satıra referans verir.Bunlar yardımıyla başka tabloların satırlarına/primary keylerine faydalarınız/referans verebiliriz.
+VErileri tekrar edebilir ondan dolayı integer yaparız.Tekrar edebilir buda aynı isimde yazar olabilir veya aynı yazarın farklı kitapları olabilir.
+*/
 
+/*CREATE TABLE book (
+	id SERIAL PRIMARY KEY,/*int bir veri tipidir SERIAL +1 ol. artar */  /*PRIMARY KEY:Birincil ol yani birinci satırda olan satırları diğer satırlardan ayır */
+	title VARCHAR(100) NOT NULL, /*NOT NULL:Burda kitabin baslıgının bos olmasını istemiyoruz demektir. VARCHAR(100)'lede 1-100 arasında olacaıgın söylüyoruz.'*/
+	page_number INTEGER NOT NULL,
+	inventory_id INTEGER REFERENCES inventory(inventory_id)/*FOREIGN key ler ilişki kuracagı için genelde ilişki kuracagı veri tabanının adına göre yaparız*/
+);*/
+
+/*select * from book*/
+
+-- insert into book (id,title,page_number,inventory_id)values(1,'Furkan',6,55) ekleyecegiiz veriler.
+select * from book
 
 
 
