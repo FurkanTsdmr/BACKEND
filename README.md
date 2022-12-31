@@ -1320,17 +1320,507 @@ DİREKT TANIMLI OLAN MAİLLERİMİZE GELİP ÇİFT TIKLADINTAN SONRA -> DEĞİŞ
 
 
 
+---------------------------------------------------- CHECK ----------------------------------------------------
+ CHECK
+CHECK kısıtlaması ile uyguladığımız sütundaki verilere belirli koşullar verebiliriz. Örneğin age (yaş) olarak belirlediğimiz bir sütuna negatif değerler verebiliriz veya web portaline üye olan kullanıcıların yaşlarının 18 yaşından büyük olması gibi kendi senaryolarımıza uygun başka kıstlamalar da vermek isteyebiliriz.
+
+CHECK kısıtlamasını da tablo oluştururken veya ALTER komutu ile beraber tablo oluştuktan sonra kullanabiliriz.
+
+CHECK Kullanımı
+Employees şeklinde bir tablomuzu oluşturalım. Tablodaki age sütununda bulunan verilerin 18'e eşit veya büyük olmasını istiyoruz.
+
+CREATE TABLE Employees (
+    ---
+    age INTEGER CHECK (age>=18)
+    ----
+);
+ALTER ve CHECK
+ALTER TABLE <tablo_adı>
+ADD CHECK (age>=18)
+
+
+-- INSERT INTO users(username,email,age)
+-- VALUES 
+-- 	('gamer3','gamer5@gmail.com',-22);
+	
+-- SELECT * FROM users;
+
+-- CHECK KISITLAMALARINI 2 ŞEKİLDE YAPABİLİRİZ;
+-- 1-YA TABLOYU OLUŞTURURKEN 
+-- 2-YA DA TABLODA DEĞİŞİKLİK YAPARKEN.
+
+ALTER TABLE users
+ADD CHECK (age >18)
+
+![image](https://user-images.githubusercontent.com/66878884/210130143-f4433bdc-5c2a-4be0-b03c-119a62719c54.png)
+BU ŞEKİLDE HATA ALIYORUZ BU DA YUKARIDA Kİ HATALARIMIZ GİBİ BİZE UYMAYAN VERİLERİN OLDUĞUNU BELİRTİYOR.
+![image](https://user-images.githubusercontent.com/66878884/210130162-f22dc862-3bbd-4716-a396-f28003f9d060.png)
+
+![image](https://user-images.githubusercontent.com/66878884/210130191-d76bce1b-c687-4ace-b091-df5998a01c23.png)
+BU ŞEKİLDE SİLEREK TABLOMUZU DÜZENLİYORUZ.
+	    ![image](https://user-images.githubusercontent.com/66878884/210130213-44a2a7c3-05e3-4bb0-88a8-6364066c456c.png)
+
+	    
+![image](https://user-images.githubusercontent.com/66878884/210130235-85f494de-a0c7-40b9-86de-882c6384d007.png)
+YAPTIGIMIZ TANIMLANIN DOĞRULUĞUNU BURADA GÖRÜYORUZ BURDA USER TABLOSUNDA Kİ users_age_check'in KISITLMASINA KARŞI GELİYORSUN DİYOR VE -'Yİ POZİTİF BİR DEĞERE DÖNEREK TABLOMUZA EKLEYEBİLİYORUZ.
+	    
+![image](https://user-images.githubusercontent.com/66878884/210130269-84e75a23-fd7d-4729-b99e-b62946f0d68c.png)
+	    
+CREATE TABLE products(
+product_no integer,
+name text,
+price numeric CHECK (price > 0),
+discounted_price numeric CHECK (discounted_price > 0),
+CHECK (price > discounted_price)-- ayrı bir CHECK daha koyarak PRİCE'IN İNDİRİM YAPILMIŞ FİYATTAN DAHA BÜYÜK OLMAK ZORUNDADIR DİYE FARKLI BİR CHEK KULLANDIK.
+);
+	    ![image](https://user-images.githubusercontent.com/66878884/210130425-28cdce53-dbc5-4fd7-ba39-af5073d9a21c.png)
+YANLIS KARSILASTIRMA YAPTIGIMIZ İÇİN BİZE KARŞI GELİYOR. - DEĞER VERSEKTE BİZE HATA VERİR.
+	    
+![image](https://user-images.githubusercontent.com/66878884/210130439-8411a63c-33dd-433a-9195-d048b9daae19.png)
+DOĞRU ŞEKİLDE YAPTIGIMIZDA BİZİ BU TABLO KARŞILAR.
+	    
+
+	    
+
+ -------------------------------------------------INNER JOIN ------------------------------------------------
+
+JOIN Kavramı (Birleştirme)
+
+
+Veraitabanları çoğunlukla birbiri ile ilşkili olan tablolardan oluşur. Bu birbiri ile ilişkili olan tablardaki verileri farklı JOIN yapıları kullanarak sanal olarak birleştirip daha anlamlı veriler haline getirebiliriz.
+
+
+
+INNER JOIN
+
+
+INNER JOIN yapısı sayesinde birbiriyle ilişkili olan tabloların birbiriyle eşleşen (kesişen) verilerini sıralayabiliriz. Senaryomuzda kitapları gösterdiğimiz book tablosu ve yazarları gösterdiğimiz author tablosu var, author tablosunun id sütunuyla book tablosunun author_id sütunlarında bulunan veriler sayesinde her iki tabloya ait bilgilerden daha anlamlı sonuçları elde edebiliriz.
+
+
+
+Aşağıdaki SQL sorgusunda kitap isimlerini yazar isim ve soyisimler ile birlikte gösterebiliriz.
+
+
+
+SELECT book.title, author.first_name, author.last_name
+FROM book
+JOIN author ON author.id = book.author_id;
+
+
+Yukarıdaki sorgumuzda tablolar arasındaki eşleşmeyi author.id ve book.author_id sütunları yardımıyla yapıyoruz.
+
+
+
+Inner Join
+
+
+
+Yukarıdaki görselimizde de gördüğümüz üzere INNER JOIN tablolar arasındaki eşleşen (kesişen) verileri sıralar. Bundan dolayı INNER JOIN yapısı simetriktir, author - book tablolarının yerlerinin değiştirilmesi sonucu etkilemez.
+            ![image](https://user-images.githubusercontent.com/66878884/210132492-aac4169b-8d61-4766-bb53-705db369fd84.png)
+
+
+
+INNER JOIN Söz Dizimi
+
+
+SELECT <sütun_adı>, <sütun_adı> ...
+FROM <tablo1_adı>
+INNER JOIN <tablo2_adı>
+ON <tablo1_adı>.<sütun_adı> = <tablo2_adı>.<sütun_adı>;
+q
+
+Buradaki tablo1 "left table", tablo2 "right table" olarak da adlandırılır.
+
+
+	    
+![image](https://user-images.githubusercontent.com/66878884/210132382-a2432fb9-5901-4e2a-8288-c7d9726833b3.png)
+![image](https://user-images.githubusercontent.com/66878884/210132428-e40997f3-60b5-4b1b-af07-6082056d56d1.png)
+![image](https://user-images.githubusercontent.com/66878884/210132483-e1dc0c64-9382-4a64-9bf9-8538047fb3f9.png)
+AYNI SONUCU ALIRIZ
+
+ -------------------------------------------------LEFT JOIN ------------------------------------------------
+
+
+
+LEFT JOIN yapısındaki tablo birleştirmesinde, birleştirme işlemi tablo 1 (soldaki tablo) üzerinden gerçekleştirilir. Senaryomuzu şu şekilde düşünelim eğer tablo 1 olarak book tablosunu aldığımızda öncelikle book tablosundaki ilgili sütundaki tüm verileri alacağız, sonrasında bu verilerin eşleştiği ilgili tablo 2 sütunundaki verileri alacağız. Tablo 1 de olup Tablo 2 de olmayan veriler için NULL değeri kullanılır.
+
+
+
+Aşağıdaki SQL sorgusunda kitap isimlerinin tamamını alıyoruz, sonrasında bu kitap isimleriyle eşleşebilen yazar isimlerini alıyoruz. Kitap isimlerine karşılık olmayan yazarlar için NULL değeri alıyoruz.
+
+
+
+SELECT book.title, author.first_name, author.last_name
+FROM book
+LEFT JOIN author
+ON author.id = book.author_id;
+
+
+Yukarıdaki sorgumuz sonucunda göreceğimiz gibi kitapların yazar bilgisine sahip değilse NULL değerlerini alırız.
+            ![image](https://user-images.githubusercontent.com/66878884/210132859-c26c1275-08f3-4ba6-acd4-ef92b6184799.png)
+
+
+Left Join
+
+
+
+Yukarıdaki görselimizde de gördüğümüz üzere LEFT JOIN tablolar arasındaki eşleşmeyi tablo 1 (soldaki tablo) üzerinden belirlenir.
+
+
+
+LEFT JOIN Söz Dizimi
+
+
+SELECT <sütun_adı>, <sütun_adı> ...
+FROM <tablo1_adı>
+LEFT JOIN <tablo2_adı>
+ON <tablo1_adı>.<sütun_adı> = <tablo2_adı>.<sütun_adı>;
+
+
+Buradaki tablo1 "left table", tablo2 "right table" olarak da adlandırılır.
+            
+ -------------------------------------------------RIGHT JOIN ------------------------------------------------
+RIGHT JOIN yapısındaki tablo birleştirmesinde, birleştirme işlemi tablo 2 (sağdaki tablo) üzerinden gerçekleştirilir. Senaryomuzu şu şekilde düşünelim eğer tablo 2 olarak author tablosunu aldığımızda öncelikle author tablosundaki ilgili sütundaki tüm verileri alacağız, sonrasında bu verilerin eşleştiği ilgili tablo 1 sütunundaki verileri alacağız. Tablo 2 de olup Tablo 1 de olmayan veriler için NULL değeri kullanılır.
+
+
+
+Aşağıdaki SQL sorgusunda yazar isim ve soyisim bilgilerinin tamamını alıyoruz, sonrasında eşleşebilen kitap isimlerini alıyoruz. Yazar bilgilerine karşılık olmayan kitap isimleri için NULL değeri alıyoruz.
+
+
+
+SELECT book.title, author.first_name, author.last_name
+FROM book
+RIGHT JOIN author
+ON author.id = book.author_id;
+
+
+Yukarıdaki sorgumuz sonucunda göreceğimiz gibi yazarlara ait olmayan kitaplar NULL değerlerini alırız.
+            ![image](https://user-images.githubusercontent.com/66878884/210132872-e8348949-c2fe-4ec3-aa3b-621f30f1b643.png)
 
 
 
 
+Right Join
 
 
 
+Yukarıdaki görselimizde de gördüğümüz üzere LEFT JOIN tablolar arasındaki eşleşmeyi tablo 1 (soldaki tablo) üzerinden belirlenir.
 
 
 
+RIGHT JOIN Söz Dizimi
+
+
+SELECT <sütun_adı>, <sütun_adı> ...
+FROM <tablo1_adı>
+RIGHT JOIN <tablo2_adı>
+ON <tablo1_adı>.<sütun_adı> = <tablo2_adı>.<sütun_adı>;
+
+
+Buradaki tablo1 "left table", tablo2 "right table" olarak da adlandırılır.
+
+ -------------------------------------------------FULL JOIN ------------------------------------------------
 
 
 
+FULL JOIN
+Full JOIN yapısındaki tablo birleştirmesinde, birleştirme işlemi her iki tablo üzerinden gerçekleştirilir. Senaryomuzu şu şekilde düşünelim eğer tablo 1 olarak book tablosunu aldığımızda öncelikle book tablosundaki ilgili sütundaki tüm verileri alacağız, sonrasında tablo 2 deki ilgili sütunlardan tüm verileri alacağız. Tablo 1 de olup Tablo 2 de olmayan ve Tablo 2 de olup Tablo 1 de olmayan veriler için NULL değeri kullanılır.
+
+Aşağıdaki SQL sorgusunda kitap isimlerinin tamamını alıyoruz, sonrasında yazar isimlerini alıyoruz. Eşleşemeyen veriler için NULL değeri alıyoruz.
+
+SELECT book.title, author.first_name, author.last_name
+FROM book
+FULL JOIN author
+ON author.id = book.author_id;
+Yukarıdaki sorgumuz sonucunda göreceğimiz gibi kitapların yazar bilgisine sahip değilse NULL değerlerini alırız, yazarlar kitap bilgisine sahip değilse orada da NULL değerlerini alırız.
+
+Full Join
+
+Yukarıdaki görselimizde de gördüğümüz üzere FULL JOIN tablolar arasındaki birleştirmeyi her iki tablo üzerinden belirlenir.
+
+FULL JOIN Söz Dizimi
+SELECT <sütun_adı>, <sütun_adı> ...
+FROM <tablo1_adı>
+FULL JOIN <tablo2_adı>
+ON <tablo1_adı>.<sütun_adı> = <tablo2_adı>.<sütun_adı>;
+Buradaki tablo1 "left table", tablo2 "right table" olarak da adlandırılır.
+
+
+ -------------------------------------------------FULL JOIN ------------------------------------------------
+UNION operatörü sayesinde farklı SELECT sorgularıyla oluşan sonuçları tek bir sonuç kümesi haline getiririz.
+
+
+
+UNION Kullanımı
+
+
+bookstore veritabanında iki adet sorgu yapıyoruz. İlk sorgumuzda sayfa sayısı en fazla olan 5 kitabı, ikinci sorgumuzda ise isme göre 5 kitabı sıralıyoruz. UNION anahtar kelimesi sayesinde bu iki sorguyu da birleştirebiliriz.
+
+
+
+(
+SELECT * 
+FROM book
+ORDER BY title
+LIMIT 5
+)
+UNION
+(
+SELECT * 
+FROM book
+ORDER BY page_number DESC
+LIMIT 5
+);
+
+
+UNION operatörü kullanılacağı sorguların, sütun sayıları eşit olmalıdır ve sütunlardaki veri tipleri eşleşmelidir.
+
+
+
+UNION Söz Dizimi
+
+
+SELECT <sütun_adı>, <sütun_adı>...
+FROM <table1>
+UNION
+SELECT <sütun_adı>, <sütun_adı>...
+FROM <table2>
+
+UNION ALL
+
+
+UNION operatörü bize birleşik veriler içerisindeki tekrar edenleri göstermez. Tekrar edenleri görmek için UNION ALL kullanırız.
+            
+            
+            
+            
+            
+  -------------------------------------------------INTERSECT ve EXCEPT ------------------------------------------------
+           
+   INTERSECT operatörü sayesinde farklı SELECT sorgularıyla oluşan sonuçların kesişen verilerini tek bir sonuç kümesi haline getiririz.
+
+
+
+INTERSECT Kullanımı
+
+
+bookstore veritabanında iki adet sorgu yapıyoruz. İlk sorgumuzda sayfa sayısı en fazla olan 5 kitabı, ikinci sorgumuzda ise isme göre 5 kitabı sıralıyoruz. INTERSECT anahtar kelimesi sayesinde bu iki sorgu sonucunda oluşan veri kümelerinden kesişen verileri tek bir sonuçta birleştiririz.
+
+
+
+(
+SELECT * 
+FROM book
+ORDER BY title
+LIMIT 5
+)
+INTERSECT
+(
+SELECT * 
+FROM book
+ORDER BY page_number DESC
+LIMIT 5
+);
+
+
+INTERSECT operatörü kullanılacağı sorguların, sütun sayıları eşit olmalıdır ve sütunlardaki veri tipleri eşleşmelidir.
+
+
+
+INTERSECT Söz Dizimi
+
+
+SELECT <sütun_adı>, <sütun_adı>...
+FROM <table1>
+INTERSECT
+SELECT <sütun_adı>, <sütun_adı>...
+FROM <table2>
+
+INTERSECT ALL
+
+
+INTERSECT operatörü bize kesişen veriler içerisindeki tekrar edenleri göstermez. Tekrar edenleri görmek için INTERSECT ALL kullanırız.
+
+
+
+EXCEPT Kullanımı
+
+
+bookstore veritabanında iki adet sorgu yapıyoruz. İlk sorgumuzda sayfa sayısı en fazla olan 5 kitabı, ikinci sorgumuzda ise isme göre 5 kitabı sıralıyoruz. EXCEPT anahtar kelimesi sayesinde ilk sorguda olup ancak ikinci sorguda olmayan verileri gösterir.
+
+
+
+(
+SELECT * 
+FROM book
+ORDER BY title
+LIMIT 5
+)
+EXCEPT
+(
+SELECT * 
+FROM book
+ORDER BY page_number DESC
+LIMIT 5
+);
+
+
+EXCEPT operatörü kullanılacağı sorguların, sütun sayıları eşit olmalıdır ve sütunlardaki veri tipleri eşleşmelidir.
+
+
+EXCEPT Söz Dizimi
+
+
+SELECT <sütun_adı>, <sütun_adı>...
+FROM <table1>
+EXCEPT
+SELECT <sütun_adı>, <sütun_adı>...
+FROM <table2>
+
+EXCEPT ALL
+
+
+EXCEPT operatörü bize ilk sorguda olan ancak ikinci sorguda olmayan veriler içerisindeki tekrar edenleri göstermez. Tekrar edenleri görmek için EXCEPT ALL kullanırız.         
+            
+            
+            
+  -------------------------------------------------ALT SORGU ------------------------------------------------
+            
+  Alt Sorgular (Subqueries)
+
+
+Bir sorgu içerisinde, o sorgunun ihtiyaç duyduğu veri veya verileri getiren sorgulardır.
+
+
+
+Alt Sorgu Kullanımı
+
+
+bookstore veritabanında "Gülün Adı" isimli kitabımızın sayfa sayısı 466 dır. Bu kitaptan daha fazla sayıda sayfası bulunan kitapları aşağıdaki sorgu yardımıyla sıralayabiliriz.
+
+
+
+SELECT *
+FROM book
+WHERE page_number > 466;
+
+
+Ancak yukarıdaki sorgumuzda şöyle bir sorun var. 466 ifade statik bir ifade ve biz bu değeri bilmiyor olabiliriz. Bu nedenle buradaki 466 rakamını aşağıdaki sorgu yardımıyla bulabiliriz.
+
+
+
+SELECT page_number
+FROM book
+WHERE title = 'Gülün Adı'
+
+
+İşte bu ikinci sorgumuz ilk sorgumuzda bir alt sorgu görevi görebilir. Her iki sorguyu da birleştirelim.
+
+
+
+SELECT *
+FROM book
+WHERE page_number >
+(
+SELECT page_number
+FROM book
+WHERE title = 'Gülün Adı'
+);          
+            
+            
+            
+            
+  ------------------------------------------------- Any ve All Operatörleri  -------------------------------------------------
+
+
+Any ve All operatörleri alt sorugularda sıklıkla kullanılır ve tek bir sütunda bulunan bir değerle bir değer dizisinin karşılaştırılmasını sağlar.
+
+
+
+ANY Operatörü
+
+
+Alt sorgudan gelen herhangi bir değer koşulu sağlaması durumunda TRUE olarak ilgili değerin koşu sağlamasını sağlar. bookstore veritabanında yapmış olduğumuz aşağıdaki sorguyu inceleyelim.
+
+
+
+SELECT first_name, last_name
+FROM author
+WHERE id = ANY
+(
+  SELECT id
+  FROM book
+  WHERE title = 'Abe Lincoln in Illinois' OR title = 'Saving Shiloh'
+)
+
+
+Yukarıda görmüş olduğunuz gibi alt sorgudan gelebilecek potansiye iki id değeri var, bu id değerinin her ikisi de birbirinden bağımsız olarak ana sorgudaki id sütununda bulunan değerler ile eşleştiği için sorgu sonucunda oluşan sana tabloda id değeri 4 ve 5 olan yazarlara ait first_name ve last_name değerlerini göreceğiz.
+
+
+
+ALL Operatörü
+
+
+Alt sorgudan gelen tüm değerlerin koşulu sağlaması durumunda TRUE olarak döner.
+
+bookstore veritabanındaki yine aynı sorguyu inceleyelim.
+
+
+
+SELECT first_name, last_name
+FROM author
+WHERE id = ALL
+(
+  SELECT id
+  FROM book
+  WHERE title = 'Abe Lincoln in Illinois' OR title = 'Saving Shiloh'
+)
+
+
+Burada ne söylemiştik alt sorgu tarafından 4 ve 5 id leri gelecek burada eştlik olduğu için aynı anda 4 ve 5 in bu şulu sağlaması olanaksız olduğu için herhangi bir değer dönülmeyecektir.           
+            
+            
+     ------------------------------------------------- ALT SORGULAR VE JOIN KULLANIMI  -------------------------------------------------         
+            
+    Alt Sorgular ve JOIN Kullanımı
+
+
+Altsorgular ve JOIN kavramları birlikte çok sık kullanılırlar. Aşağıdaki iki senaryoda bu iki yapıyı birlikte kullanacağız.
+
+
+
+İlk senaryomuz: bookstore veri tabanında kitap sayfası sayısı ortalama kitap sayfası sayısından fazla olan kitapların isimlerini, bu kitapların yazarlarına ait isim ve soyisim bilgileriyle birlikte sıralayınız.
+
+
+
+SELECT author.first_name, author.last_name, book.title
+FROM author
+INNER JOIN book ON book.author_id = author.id
+WHERE page_number >
+(
+  SELECT AVG(page_number) FROM book
+);
+
+
+
+Yukarıdaki sorgumuzda kitaplara ait yazar bilgilerini JOIN kullanarak elde ediyoruz. Ortalama sayfa sayısını da alt sorgudan getiriyoruz.
+
+
+
+İkinci senaryomuz: dvdrental veritabanında en uzun filmlerin isimlerini aktör isim ve soyisimleriyle birlikte sıralayalım.
+
+
+
+SELECT actor.first_name, actor.last_name, film.title
+FROM actor
+JOIN film_actor ON film_actor.actor_id = actor.actor_id
+JOIN film ON film.film_id = film_actor.film_id
+WHERE film.length =
+(
+  SELECT MAX(length)  FROM film
+)
+
+
+
+Burada da görmüş olduğumuz gibi film lerin aktör bilgilerini ikili JOIN yapısı kullanarak elde ediyoruz. En uzun film süresini de alt sorgudan getiriyoruz.        
 
