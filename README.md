@@ -1165,17 +1165,98 @@ VErileri tekrar edebilir ondan dolayı integer yaparız.Tekrar edebilir buda ayn
 select * from book
 
 
+----------------------------------
+	    POSTRESQL'DE 21 FARKLI VERİ TİPİ VARDIR -> POSTGRESQL (KULLANILAN VERSİYON) DATA TYPES YAZARAK DOC.'U GÖRÜNTÜLEYEBİLİRİZ.
+	    
+![image](https://user-images.githubusercontent.com/66878884/210126120-eec6437e-4336-4b17-8b8b-8b916b2f6fc4.png)
+
+	    
+---------------------------------
+ ![image](https://user-images.githubusercontent.com/66878884/210126361-591d69de-a88c-4172-9e37-63fc46046bdb.png)
+
+---------------------------------
+![image](https://user-images.githubusercontent.com/66878884/210126429-df4aa02d-9626-44d2-b194-ce6d62e2b1d5.png)
+---------------------------------
+![image](https://user-images.githubusercontent.com/66878884/210126451-6042572b-9efc-4d97-9df9-53f710309676.png)  
+---------------------------------	    
+![image](https://user-images.githubusercontent.com/66878884/210126460-0a28fd90-3b21-477c-8f11-6cedba0c1740.png)
+---------------------------------	    
+![image](https://user-images.githubusercontent.com/66878884/210126463-e5e61755-6843-412c-b281-1bcc32ea7a1d.png)
+---------------------------------
+![image](https://user-images.githubusercontent.com/66878884/210126473-66644061-f59f-4d12-8fae-b10d6019f16c.png)
+---------------------------------
+![image](https://user-images.githubusercontent.com/66878884/210126480-43ecb15d-eb1c-4bfd-af18-2e0ec52dd301.png)
+---------------------------------
+
+------------------------------------------------- CHAR TYPES ------------------------------------------------
+![image](https://user-images.githubusercontent.com/66878884/210126969-be7b9e1f-6104-4190-8a57-94a1d690ec9a.png)
+
+-- -- CHARACTER TYPES
+-- -- CHAR:Bizim belirtmiş oldugumuz kadar kapsa 10.olarak belirtsek bile 3 kelimelik şey yazsakta kendini 10'a göre ayarlar.
+-- -- VARCHAR:bizim belirtmiş oldugumuz değer kadar yer kaplar 10 ol. belirsek bile diyelim ki aşağıda ki gibi 5 kelimelik bir şey yazdıgımızda kendini 5'e göre ayarlar.
+-- --Herhangi bir sınırlama yapmadan bunu yazarsak içeriği kadar kapsar.
+-- -- SELECT ('Lorem'::CHAR(10))
+-- -- SELECT ('Lorem ipsum dolor sit amet'::CHAR(10));
+-- -- SELECT ('Lorem'::VARCHAR(10));
+-- -- SELECT ('Lorem ipsum dolor sit amet'::VARCHAR(10));
+-- -- SELECT ('Lorem ipsum dolor sit amet'::VARCHAR);
+-- -- SELECT ('Lorem'::TEXT);
+-- -- SELECT ('Lorem'::CHAR(10));
+-- SELECT ('Lorem ipsum dolor sit ame'::TEXT);
+
+--BOOLEAN TYPES
+-- SELECT (true,'yes','t',1) TRUE
+-- SELECT (false,'no','f',0) FALSE
+-- SELECT ('no'::BOOLEAN) 
+-- SELECT (1::BOOLEN) 
+-- SELECT ('f'::BOOLEN) 
+-- SELECT (true::BOOLEN) 
+-- SELECT (NULL::BOOLEN) 
 
 
+--DATE TIME TYPES
+-- SELECT ('1980-12-03' :: DATE)
+-- SELECT ('DEC-03-1980' :: DATE)
+-- SELECT ('DEC 03 1980' :: DATE)
+-- SELECT ('1980 December 03')
 
+-- SELECT ('03:44' :: TIME)
+-- SELECT ('03:44 AM' :: TIME)
+-- SELECT ('03:44 PM' :: TIME)
+-- SELECT ('03:44:11' :: TIME)
+SELECT ('02:16' :: TIME WITH TIME ZONE)--Zaman dilimiyle beraber getirir.+0... ol zmana getirir UTC'ye göre universal cordinatet time'a göre
+-- SELECT ('1980 December 03 02:16:08' :: TIMESTAMP)--Zaman ve tarihi beraber getirir.
 
+	    
+ -------------------------------------------------NOT NULL AND AFTER ------------------------------------------------
+ -- NOT NULL : Bir sütunumuzda devamlı olarak veri olmasını istiyoruz hiçbir türlü null değerini istemiyorsak eğer kullanırız.
+--EĞER Kİ BU TANIMLAMALARI TABLOMUZ OLUSTUKTAN SONRA YAPMAK AKLIMIZA GELDİYSE ALTER KOMUTUNU KULLANIRIZ VE TANIMLAMALARIMIZI YAPARIZ.
+	  
+![image](https://user-images.githubusercontent.com/66878884/210127981-1248900c-4680-4069-a666-8be66b6f2ee2.png)
+	    
+	    
+	    
 
+![image](https://user-images.githubusercontent.com/66878884/210128053-674c549f-812f-4c36-8a16-a8eefe9acfb5.png)
+ALTER KOMUTUNDAN SONRA BÖYLE BİR HATA ALIRIZ BURDA BİZE SEN USERNAME SÜTUNUN NOT NULL YAPMAYA CALISIYORSUN ANCAK BURADA NULL İFADELER VAR, NULL İFADESİ OLAN BİR SÜTUNU SEN NOTNULL'A ÇEVİREMEZSİN HATASI VERİYOR BİZLERE. BU HATADAN KURTULMA FARKLI SENARYOLARDA FARKLI ŞEKİLLERDE YAPILIR, SAYISAL BİR TABLO OLSAYDI ANORMAL BİR DEĞER VERİLEREK YAPILIYOR YAŞİ SÜTUNU OLSAYDI 999 GİBİ DEĞERLER VERİLİYOR Kİ BUNUN EKSTREM BİR DURUM OLDUGU BELLİ OLSUN İSTEDİĞİMİZ İÇİN.BİZ BURADA NULL OLAN SATIRLARI SİLEREK BU HATADAN KURTULACAĞIZ.
 
+![image](https://user-images.githubusercontent.com/66878884/210128148-9d849190-aa53-498b-9d06-e7a0d71a4b64.png)
+VE DELETE 0 ŞEKLİNDE BİR DÖNÜŞ ALDIK. HERHANGİ BİR ŞEKİLDE BİR SATIR SİLİNMEDİ BURDA = DEĞİL IS KULLANMAMIZ GEREKLİDİR.
 
-
-
-
-
+![image](https://user-images.githubusercontent.com/66878884/210128164-06cf5187-379a-466f-bb28-72044861dccb.png)
+VE BAŞARIYLA SİLDİK.
+	    
+![image](https://user-images.githubusercontent.com/66878884/210128187-4fb970bd-19b5-4f8b-877c-838887a50805.png)
+ TABLOMUZU SADECE NULL OLMAYAN İFADELERE SAHİP ARTIK ŞİMDİ GİDİP TEKRARDAN ;
+	    
+![image](https://user-images.githubusercontent.com/66878884/210128201-1ce04fb7-cf56-4346-ba9c-66b156757449.png)
+BAŞARILI ŞEKİLDE DÖNÜŞÜMÜZÜ ALDIK.
+	    
+![image](https://user-images.githubusercontent.com/66878884/210128218-ec3c8493-b553-4b03-b9f5-4fc3b6f88efe.png)
+DEĞERİ NULL OLAN BİR VERİ GİRMEK İSTEDİĞİMİZ ZAMAN BİZE BU HATAYI VERİR.
+	    
+![image](https://user-images.githubusercontent.com/66878884/210128262-201f44fa-18ce-4504-b208-0d865b2be6d2.png)
+BOŞ BİR DEĞER BİZİM İÇİN NULL DEĞER DEĞİLDİR DEĞER KOYMADIGIMIZ ZAMAN 0 OL. TANIMLARIZ VE NULL DEMEK DEĞİLDİR BURASI.
 
 
 
