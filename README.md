@@ -1285,6 +1285,39 @@ BOŞ BİR DEĞER BİZİM İÇİN NULL DEĞER DEĞİLDİR DEĞER KOYMADIGIMIZ ZAM
 
 
 
+---------------------------------------------------- UNIQUE ----------------------------------------------------
+UNIQUE
+UNIQUE kısıtlaması ile uyguladığımız sütundaki verilerin birbirlerinden farklı benzersiz olmalarını isteriz. PRIMARY KEY kısıtlaması kendiliğinden UNIQUE kısıtlamasına sahiptir.
+
+NOT NULL kısıtlamasında olduğu gibi tablo oluştururken veya ALTER komutu ile beraber tablo oluştuktan sonra da kullanabiliriz.
+
+UNIQUE Kullanımı
+Employees şeklinde bir tablomuzu oluşturalım. Tablodaki email sütununda bulunan verileri UNIQUE olarak belirlemek istersek.
+
+CREATE TABLE Employees (
+    ---
+    emaile VARCHAR(100) UNIQUE,
+    ----
+);
+
+ALTER ve UNIQUE
+
+ALTER TABLE <tablo_adı>
+ADD UNIQUE <sütun_adı>
+
+
+Bu arada herhangi bir sütuna UNIQUE kısıtlaması getirirsek ve öncesinde UNIQUE olmayan verileri kaldrmamız gerekir.
+
+
+
+![image](https://user-images.githubusercontent.com/66878884/210128415-a8ddf980-109c-491a-834d-534600e43d00.png)
+AYNEN NOT NULL KISITLAMASINDA OLAN HATASINDA OLDUGU GİBİ BURDA DA O HATAYI ALIRIZ UNİQUE OLMAYAN VERİLERİ BİLDİRİR.
+	    
+![image](https://user-images.githubusercontent.com/66878884/210128494-f3a4ceb1-9805-46df-8e1d-26c85a30d910.png)
+DİREKT TANIMLI OLAN MAİLLERİMİZE GELİP ÇİFT TIKLADINTAN SONRA -> DEĞİŞTİRİP -> F6 İLE KAYIT EDİP DEĞİŞİKLİĞİ YAPARIZ .
+	    
+![image](https://user-images.githubusercontent.com/66878884/210128639-c6911227-652c-4476-bd06-afd2d39c0637.png)
+
 
 
 
